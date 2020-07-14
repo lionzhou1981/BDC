@@ -3,6 +3,9 @@ import time
 from RPi import GPIO
 import Common
 
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)  # 关闭警告
+
 channel0 = 19
 channel1 = 26
 channel2 = 12
