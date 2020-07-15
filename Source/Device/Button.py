@@ -35,6 +35,11 @@ def Run():
     GPIO.add_event_detect(channel4, GPIO.RISING, bouncetime=50)
     GPIO.add_event_detect(channel5, GPIO.RISING, bouncetime=50)
     _thread.start_new_thread(Loop, ())
+    print("Button {0}".format(Common.RUNNING))
+
+
+def Stop():
+    print("Button {0}".format(Common.RUNNING))
 
 
 def Loop():

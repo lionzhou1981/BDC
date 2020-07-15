@@ -8,6 +8,10 @@ def Run():
     print("Battery {0}".format(Common.RUNNING))
 
 
+def Stop():
+    print("Battery {0}".format(Common.RUNNING))
+
+
 def Loop():
     cd = 10
     while Common.RUNNING:
