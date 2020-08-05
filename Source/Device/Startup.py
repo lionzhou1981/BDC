@@ -1,10 +1,14 @@
+import datetime
 import threading
 import time
 import signal
+import json
 import Common
 import Battery
 import Screen
 import Button
+import Audio
+import Voice
 
 
 def Exit(_signum, _frame):
@@ -24,8 +28,9 @@ if __name__ == '__main__':
 
     while Common.RUNNING:
         time.sleep(1)
-        json = [["label_time", "label", 20, 20, 100, 40]]
-        Screen.show(json)
+        ui = [["label_time", "label", 20, 20, 100, 40]]
+        value = {'label_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+        Screen.show(ui, value)
 
     Battery.Stop()
     Screen.Stop()
@@ -35,8 +40,3 @@ if __name__ == '__main__':
 
     time.sleep(0.5)
     print("Exited")
-
-    #t1 = threading.Thread(target=run, args=("t1", ))
-    #t2 = threading.Thread(target=run, args=("t2", ))
-    #t1.start()
-    #t2.start()

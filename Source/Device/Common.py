@@ -5,8 +5,12 @@ RUNNING = True
 
 PICDIR = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pics')
 LIBDIR = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'libs')
+MODDIR = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'modules')
 
 if os.path.exists(LIBDIR):
     sys.path.append(LIBDIR)
+
+if os.path.exists(MODDIR):
+    sys.path.append(MODDIR)
 
 print("Common init.")
