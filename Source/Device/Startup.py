@@ -16,15 +16,17 @@ def Exit(_signum, _frame):
     print("{0} - {1} - {2}".format("Exiting", _signum, _frame))
 
 
+def Button_Down(_button):
+    print("Button {0} clicked.".format(_button))
+
+
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, Exit)
     signal.signal(signal.SIGTERM, Exit)
 
-    Battery.Run()
-    Screen.Run()
-    Audio.Run()
-    Voice.Run()
-    Button.Run()
+    Battery.Start()
+    Sound.Start()
+    Button.Start(_down=Button_Down)
 
     while Common.RUNNING:
         time.sleep(1)
@@ -32,11 +34,9 @@ if __name__ == '__main__':
         value = {'label_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
         Screen.show(ui, value)
 
-    Battery.Stop()
-    Screen.Stop()
-    Audio.Stop()
-    Voice.Stop()
     Button.Stop()
+    Sound.Stop()
+    Battery.Stop()
 
     time.sleep(0.5)
     print("Exited")

@@ -2,62 +2,74 @@ import _thread
 import time
 import os
 import smbus
+import datetime
 import Common
-import RPi.GPIO as GPIO
 
-value = -1
+MAX17043_ADDR = 0x36
+MAX17043_VCELL = 0x02
+MAX17043_SOC = 0x04
+MAX17043_MODE = 0x06
+MAX17043_VERSION = 0x08
+MAX17043_CONFIG = 0x0c
+MAX17043_COMMAND = 0xfe
+VOLTAGE_MAX = 3900
+VOLTAGE_MIN = 3600
 
-HW = smbus.SMBus(1)
-VCELL_REGISTER = 0x02
-SOC_REGISTER = 0x04
-MODE_REGISTER = 0x06
-VERSION_REGISTER = 0x08
-CONFIG_REGISTER = 0x0C
-COMMAND_REGISTER = 0xFE
+bus = smbus.SMBus(1)
+voltage = -1
+percent = -1
 
 
 def Start():
-    reset()
-    run()
-    _thread.start_new_thread(Loop, ())
-    print("Battery {0}".format(Common.RUNNING))
+    _thread.start_new_thread(Run, ())
+    print("Battery Started.")
 
 
 def Stop():
-    print("Battery {0}".format(Common.RUNNING))
+    print("Battery Stopped")
 
 
-def Test():
-    global value
-    print("Battery {0}".format(value))
-
-
-def Loop():
+def Run():
+    global voltage
+    global percent
     cd = 10
     while Common.RUNNING:
         time.sleep(0.1)
         cd -= 1
-        if cd > 0:
-            continue
-        else:
-            cd = 10
-        # 读取电量，写入显示
+        if cd > 0: continue
+        else: cd = 10
+
+        voltage = readVoltage()
+        percent = readPercentage()
+        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+
+        log = "{0} : {1} - {2}".format(now, voltage, percent)
+        f1 = open('/home/pi/battery.log', 'a')
+        f1.write(log + "\n")
+        f1.close()
+        print(log)
 
 
-def reset():
-    HW.write_byte_data(address, COMMAND_REGISTER, 0x00)
-    HW.write_byte_data(address, COMMAND_REGISTER, 0x04)
+def readVoltage():
+    return (1.25 * (read16(MAX17043_VCELL) >> 4))
 
 
-def run():
-    HW.write_byte_data(address, MODE_REGISTER, 0x40)
-    HW.write_byte_data(address, MODE_REGISTER, 0x00)
+def readPercentage():
+    tmp = read16(MAX17043_SOC)
+    return ((tmp >> 8) + 0.003906 * (tmp & 0x00ff))
 
 
-def getSOC():
-    # Konfiguration des MAX17043
-    MSB = HW.read_byte_data(address, SOC_REGISTER)
-    LSB = HW.read_byte_data(address, SOC_REGISTER)
+def write16(reg, dat):
+    buf = [dat >> 8, dat & 0x00ff]
+    bus.write_i2c_block_data(MAX17043_ADDR, reg, buf)
 
-    global value
-    value = MSB + LSB / 256.0
+
+def read16(reg):
+    buf = bus.read_i2c_block_data(MAX17043_ADDR, reg, 2)
+    return ((buf[0] << 8) | buf[1])
+
+
+def writeRegBits(reg, dat, bits, offset):
+    tmp = read16(reg)
+    tmp = (tmp & (~(bits << offset))) | (dat << offset)
+    write16(reg, tmp)

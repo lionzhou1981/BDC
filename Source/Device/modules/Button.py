@@ -6,64 +6,46 @@ import Common
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)  # 关闭警告
 
-channel0 = 19
-channel1 = 26
-channel2 = 12
-channel3 = 16
-channel4 = 20
-channel5 = 21
-
-clicked0 = 0
-clicked1 = 0
-clicked2 = 0
-clicked3 = 0
-clicked4 = 0
-clicked5 = 0
+PIN_NUM = [22, 12, 13, 16, 6, 27]
+PIN_TXT = ["UP", "DOWN", "LEFT", "RIGHT", "ENTER", "BACK"]
+PIN_HIT = [False, False, False, False, False, False]
+EVENT_UP = None
+EVENT_DOWN = None
 
 
-def Run():
-    GPIO.setup(channel0, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(channel1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(channel2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(channel3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(channel4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(channel5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.add_event_detect(channel0, GPIO.RISING, bouncetime=50)
-    GPIO.add_event_detect(channel1, GPIO.RISING, bouncetime=50)
-    GPIO.add_event_detect(channel2, GPIO.RISING, bouncetime=50)
-    GPIO.add_event_detect(channel3, GPIO.RISING, bouncetime=50)
-    GPIO.add_event_detect(channel4, GPIO.RISING, bouncetime=50)
-    GPIO.add_event_detect(channel5, GPIO.RISING, bouncetime=50)
-    _thread.start_new_thread(Loop, ())
-    print("Button {0}".format(Common.RUNNING))
+def Start(_down=None, _up=None):
+    global EVENT_UP
+    global EVENT_DOWN
+    EVENT_UP = _up
+    EVENT_DOWN = _down
+    for i in range(len(PIN_NUM)):
+        PIN_HIT[i] = False
+        GPIO.setup(PIN_NUM[i], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+    _thread.start_new_thread(Run, ())
+    print("Button Started")
 
 
 def Stop():
-    print("Button {0}".format(Common.RUNNING))
+    print("Button Stopped")
 
 
-def Loop():
+def Run():
+    global EVENT_UP
+    global EVENT_DOWN
     while Common.RUNNING:
         time.sleep(0.001)
         try:
-            if GPIO.event_detected(channel0) and GPIO.input(
-                    channel0) == GPIO.HIGH:
-                print('Enter ')
-
-            if GPIO.event_detected(channel1):
-                print('Cancel')
-
-            if GPIO.event_detected(channel2):
-                print('UP')
-
-            if GPIO.event_detected(channel3):
-                print('DOWN')
-
-            if GPIO.event_detected(channel4):
-                print('LEFT')
-
-            if GPIO.event_detected(channel5):
-                print('RIGHT')
+            for i in range(len(PIN_NUM)):
+                input = GPIO.input(PIN_NUM[i]) == 1
+                if PIN_HIT[i] and input == False:
+                    PIN_HIT[i] = False
+                    if EVENT_UP != None:
+                        EVENT_UP(PIN_TXT[i])
+                elif PIN_HIT[i] == False and input:
+                    PIN_HIT[i] = True
+                    if EVENT_DOWN != None:
+                        EVENT_DOWN(PIN_TXT[i])
 
         except Exception as e:
             print(e)
