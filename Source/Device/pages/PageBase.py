@@ -21,6 +21,7 @@ class PageBase:
                 self.display.image = self.DrawLabel(item)
             elif item[1] == "IMAGE":
                 self.display.image = self.DrawImage(item)
+        self.display.imageChanged = True
 
     def DrawButton(self, _item, _selected):
         draw = ImageDraw.Draw(self.display.image)

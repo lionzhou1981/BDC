@@ -17,10 +17,11 @@ class Battery:
         self.MAX17043_COMMAND = 0xfe
         self.VOLTAGE_MAX = 3900
         self.VOLTAGE_MIN = 3600
+        self.VOLTAGE_CHARGING = 4100
         self.bus = smbus.SMBus(1)
         self.voltage = -1
         self.percent = -1
-        _thread.start_new_thread(Run, ())
+        _thread.start_new_thread(self.Run, ())
         print("Battery Started.")
 
     def __del__(self):
@@ -35,7 +36,14 @@ class Battery:
                 continue
             cd = 10
             self.voltage = self.readVoltage()
-            self.percent = self.readPercentage()
+            if self.voltage < self.VOLTAGE_MIN:
+                self.percent = 1
+            elif self.voltage > self.VOLTAGE_CHARGING:
+                self.percent = 999
+            elif self.voltage > self.VOLTAGE_MAX:
+                self.percent = 100
+            else:
+                self.percent = (self.voltage - self.VOLTAGE_MIN) / (self.VOLTAGE_MAX - self.VOLTAGE_MIN) * 100
             now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
 
     def readVoltage(self):

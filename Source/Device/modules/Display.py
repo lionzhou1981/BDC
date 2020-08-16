@@ -1,5 +1,6 @@
 import os
 import time
+import _thread
 import json
 import Common
 from PIL import Image, ImageDraw

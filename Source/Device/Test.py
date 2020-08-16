@@ -26,14 +26,12 @@ def Button_Up(_button):
 
 def Show_UI(o, _code):
     if _code == "Main":
-        t = PageMain()
+        t = PageMain.PageMain(o)
 
 
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, Exit)
     signal.signal(signal.SIGTERM, Exit)
-
-    Start(sys.argv[1])
 
     if sys.argv[1] == "battery":
         o = Battery.Battery()
@@ -45,6 +43,8 @@ if __name__ == '__main__':
 
     while Common.RUNNING:
         time.sleep(1)
+        if sys.argv[1] == "battery":
+            print("Battery: {0} - {1}".format(o.voltage, o.percent))
 
     time.sleep(0.5)
     print("Exited")
