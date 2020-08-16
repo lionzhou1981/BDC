@@ -8,6 +8,7 @@ from libs import epd_2in13
 
 epd = None
 image = None
+imageChanged = False
 
 
 def Start():
@@ -35,9 +36,11 @@ def Stop():
 
 def Run():
     global image
+    global imageChanged
     while Common.RUNNING:
         time.sleep(0.1)
-        ShowPart(image)
+        if imageChanged:
+            ShowPart(image)
 
 
 def ShowBase(_image):
@@ -50,10 +53,3 @@ def ShowBase(_image):
 def ShowPart(_image):
     global epd
     epd.displayPartBaseImage(epd.getbuffer(image))
-
-
-#    for item in ui:
-#        if item[1] == "label":
-#            draw.rectangle((item[2], item[3], 240, 105), fill=255)
-#            draw.text((item[2], item[3]), value[item[0]], font=font20, fill=0)
-#            epd.displayPartial(epd.getbuffer(image))

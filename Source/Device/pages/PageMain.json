@@ -1,5 +1,5 @@
 {
-    "BUTTON_RECITE": ["BUTTON",0,0,40,40,"背单词",20,true],
-    "BUTTON_TEST": ["BUTTON",50,0,40,40,"测验",20,false],
-    "BUTTON_CONFIG": ["BUTTON",100,0,40,40,"设置",20,false]
+    "BUTTON_RECITE": ["BUTTON",0,0,40,40,"背单词","NORMAL20",true],
+    "BUTTON_TEST": ["BUTTON",50,0,40,40,"测验","NORMAL20",false],
+    "BUTTON_CONFIG": ["BUTTON",100,0,40,40,"设置","NORMAL20",false]
 }
