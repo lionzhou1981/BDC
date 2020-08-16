@@ -1,55 +1,38 @@
 import os
-import threading
 import time
 import json
 import Common
 from PIL import Image, ImageDraw
 from libs import epd_2in13
 
-epd = None
-image = None
-imageChanged = False
 
+class Display:
+    def __init__(self):
+        self.epd = epd_2in13.EPD()
+        self.epd.init(epd.FULL_UPDATE)
+        self.image = Image.new('1', (epd.height, epd.width), 255)
+        self.imageChanged = False
+        self.ShowBase(image)
+        _thread.start_new_thread(self.Run, ())
+        print("Screen Started")
 
-def Start():
-    global epd
-    global image
+    def __del__(self):
+        self.epd.init(epd.FULL_UPDATE)
+        self.epd.Clear()
+        self.epd.sleep()
+        epd_2in13.epd_config.module_exit()
+        print("Screen stopped")
 
-    epd = epd_2in13.EPD()
-    epd.init(epd.FULL_UPDATE)
-    epd.Clear()
+    def Run(self):
+        while Common.RUNNING:
+            time.sleep(0.1)
+            if self.imageChanged:
+                self.ShowPart(self.image)
 
-    image = Image.new('1', (epd.height, epd.width), 255)
-    ShowBase(image)
-    _thread.start_new_thread(Run, ())
-    print("Screen Started")
+    def ShowBase(self, _image):
+        self.epd.init(epd.FULL_UPDATE)
+        self.epd.displayPartBaseImage(epd.getbuffer(image))
+        self.epd.init(epd.PART_UPDATE)
 
-
-def Stop():
-    global epd
-    epd.init()
-    epd.Clear()
-    epd.sleep()
-    epd_2in13.epd_config.module_exit()
-    print("Screen stopped")
-
-
-def Run():
-    global image
-    global imageChanged
-    while Common.RUNNING:
-        time.sleep(0.1)
-        if imageChanged:
-            ShowPart(image)
-
-
-def ShowBase(_image):
-    global epd
-    epd.init(epd.FULL_UPDATE)
-    epd.displayPartBaseImage(epd.getbuffer(image))
-    epd.init(epd.PART_UPDATE)
-
-
-def ShowPart(_image):
-    global epd
-    epd.displayPartBaseImage(epd.getbuffer(image))
+    def ShowPart(self, _image):
+        self.epd.displayPartBaseImage(epd.getbuffer(image))

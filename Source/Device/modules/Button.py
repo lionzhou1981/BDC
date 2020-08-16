@@ -3,51 +3,42 @@ import time
 from RPi import GPIO
 import Common
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)  # 关闭警告
 
-PIN_NUM = [22, 12, 13, 16, 6, 27]
-PIN_TXT = ["UP", "DOWN", "LEFT", "RIGHT", "ENTER", "BACK"]
-PIN_HIT = [False, False, False, False, False, False]
-EVENT_UP = None
-EVENT_DOWN = None
+class Button:
+    def __init__(self, _down=None, _up=None):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)  # 关闭警告
+        self.PIN_NUM = [22, 12, 13, 16, 6, 27]
+        self.PIN_TXT = ["UP", "DOWN", "LEFT", "RIGHT", "ENTER", "BACK"]
+        self.PIN_HIT = [False, False, False, False, False, False]
+        self.EVENT_UP = _up
+        self.EVENT_DOWN = _down
+        for i in range(len(self.PIN_NUM)):
+            self.PIN_HIT[i] = False
+            GPIO.setup(self.PIN_NUM[i], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
+        _thread.start_new_thread(self.Run, ())
+        print("Button Started")
 
-def Start(_down=None, _up=None):
-    global EVENT_UP
-    global EVENT_DOWN
-    EVENT_UP = _up
-    EVENT_DOWN = _down
-    for i in range(len(PIN_NUM)):
-        PIN_HIT[i] = False
-        GPIO.setup(PIN_NUM[i], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    def __del__(self):
+        print("Button Stopped")
 
-    _thread.start_new_thread(Run, ())
-    print("Button Started")
+    def Run(self):
+        while Common.RUNNING:
+            time.sleep(0.001)
+            try:
+                for i in range(len(self.PIN_NUM)):
+                    input = GPIO.input(self.PIN_NUM[i]) == 1
+                    if self.PIN_HIT[i] and input == False:
+                        self.PIN_HIT[i] = False
+                        if self.EVENT_UP != None:
+                            self.EVENT_UP(self.PIN_TXT[i])
+                    elif self.PIN_HIT[i] == False and input:
+                        self.PIN_HIT[i] = True
+                        if self.EVENT_DOWN != None:
+                            self.EVENT_DOWN(self.PIN_TXT[i])
 
+            except Exception as e:
+                print(e)
 
-def Stop():
-    print("Button Stopped")
-
-
-def Run():
-    global EVENT_UP
-    global EVENT_DOWN
-    while Common.RUNNING:
-        time.sleep(0.001)
-        try:
-            for i in range(len(PIN_NUM)):
-                input = GPIO.input(PIN_NUM[i]) == 1
-                if PIN_HIT[i] and input == False:
-                    PIN_HIT[i] = False
-                    if EVENT_UP != None:
-                        EVENT_UP(PIN_TXT[i])
-                elif PIN_HIT[i] == False and input:
-                    PIN_HIT[i] = True
-                    if EVENT_DOWN != None:
-                        EVENT_DOWN(PIN_TXT[i])
-
-        except Exception as e:
-            print(e)
-
-    GPIO.cleanup()
+        GPIO.cleanup()
