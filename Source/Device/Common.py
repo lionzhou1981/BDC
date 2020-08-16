@@ -1,5 +1,6 @@
 import os
 import sys
+from PIL import ImageFont
 
 RUNNING = True
 
@@ -13,5 +14,8 @@ if os.path.exists(LIBDIR):
 
 if os.path.exists(MODDIR):
     sys.path.append(MODDIR)
+
+FONT12 = ImageFont.truetype(os.path.join(Common.PICDIR, 'font.ttc'), 12)
+FONT20 = ImageFont.truetype(os.path.join(Common.PICDIR, 'font.ttc'), 20)
 
 print("Common init.")

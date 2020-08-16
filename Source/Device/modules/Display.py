@@ -3,29 +3,24 @@ import threading
 import time
 import json
 import Common
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 from libs import epd_2in13
 
 epd = None
-font12 = None
-font20 = None
 image = None
 
 
 def Start():
     global epd
-    global font12
-    global font20
     global image
 
-    font12 = ImageFont.truetype(os.path.join(Common.PICDIR, 'font.ttc'), 12)
-    font20 = ImageFont.truetype(os.path.join(Common.PICDIR, 'font.ttc'), 20)
     epd = epd_2in13.EPD()
     epd.init(epd.FULL_UPDATE)
     epd.Clear()
 
     image = Image.new('1', (epd.height, epd.width), 255)
     ShowBase(image)
+    _thread.start_new_thread(Run, ())
     print("Screen Started")
 
 
@@ -38,6 +33,13 @@ def Stop():
     print("Screen stopped")
 
 
+def Run():
+    global image
+    while Common.RUNNING:
+        time.sleep(0.1)
+        ShowPart(image)
+
+
 def ShowBase(_image):
     global epd
     epd.init(epd.FULL_UPDATE)
@@ -48,12 +50,6 @@ def ShowBase(_image):
 def ShowPart(_image):
     global epd
     epd.displayPartBaseImage(epd.getbuffer(image))
-
-
-def ShowPage(_code):
-    f = open(os.path.join(Common.PAGEDIR, "{0}.json".format(_code)), "r")
-    page = json.loads(f.read())
-    print(page)
 
 
 #    for item in ui:
