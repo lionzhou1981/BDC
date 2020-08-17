@@ -25,24 +25,25 @@ class PageBase:
 
     def DrawButton(self, _item, _selected):
         draw = ImageDraw.Draw(self.display.image)
-        draw.rectangle([(_item[1], _item[2]), (_item[3], _item[4])], outline=1)
-        height = font.getsize(_item[5])
-        draw.text([(_item[1], _item[2] + (_item[4] - height) / 2), (_item[3], _item[4])], _item[5], align="center", font=self.GetFont(_item[6]))
+        draw.rectangle([(_item[2], _item[3]), _item[4], _item[5]], outline=255)
+        font1 = self.GetFont(_item[7])
+        size = font1.getsize(_item[6])
+        draw.text([(_item[2], _item[3] + (_item[5] - size[1]) / 2), (_item[4], _item[5])], _item[6], align="center", font=font1)
 
     def DrawLabel(self, _item):
         draw = ImageDraw.Draw(self.display.image)
         height = font.getsize(_item[6])
-        draw.text([(_item[1], _item[2] + (_item[4] - height) / 2), (_item[3], _item[4])], _item[5], align="center", font=self.GetFont(_item[6]))
+        draw.text([(_item[2], _item[3] + (_item[5] - height) / 2), (_item[4], _item[5])], _item[6], align="center", font=self.GetFont(_item[7]))
 
     def DrawImage(self, _item):
-        bmp = Image.open(os.path.join(Common.PICDIR, _item[5]))
-        self.display.image.paste(bmp, (_item[1], _item[2]))
+        bmp = Image.open(os.path.join(Common.PICDIR, _item[6]))
+        self.display.image.paste(bmp, (_item[2], _item[3]))
 
     def GetFont(self, _font):
         if _font == "NORMAL12":
-            return Common.FONT12
+            return Common.NORMAL12
         elif _font == "NORMAL20":
-            return Common.FONT20
+            return Common.NORMAL20
 
     def OnKeyUP(self, _key):
         return
