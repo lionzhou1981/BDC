@@ -66,7 +66,7 @@ class PageBase:
         elif align == "CENTER":
             tx = ax + (_item[4] - textsize[0]) / 2
             draw.text((tx, ay), _item[6], font=font, fill=0)
-        elif align == "RIGHT"
+        elif align == "RIGHT":
             tx = bx - textsize[0]
             draw.text((tx, ay), _item[6], font=font, fill=0)
 
@@ -86,9 +86,9 @@ class PageBase:
 
     def DrawTop(self):
         label_time = json.loads('["LABEL_TIME","LABEL",3,3,150,14,"{0} ","NORMAL14","LEFT"]'.format(time.strftime("%Y-%m-%d %H:%M")))
-        label_time = json.loads('["IMAGE_BATTERY","IMAGE",230,4,16,16,"{0}"]'.format("bat_ch.png"))
         self.DrawLabel(label_time)
-        return
+        image_battary = json.loads('["IMAGE_BATTERY","IMAGE",230,4,16,16,"{0}"]'.format("bat_ch.jpg"))
+        self.DrawImage(image_battary)
 
     def GetFont(self, _font):
         if _font == "NORMAL14": return Common.NORMAL14

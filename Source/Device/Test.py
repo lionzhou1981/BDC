@@ -42,7 +42,7 @@ if __name__ == '__main__':
     btn = Button.Button(_up=Button_Up, _down=Button_Down)
     bat = Battery.Battery()
     scr = Display.Display()
-    Show_UI(o, sys.argv[2])
+    Show_UI(scr, sys.argv[2])
 
     while Common.RUNNING:
         time.sleep(1)
