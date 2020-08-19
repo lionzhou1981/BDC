@@ -44,7 +44,6 @@ class Battery:
                 self.percent = 100
             else:
                 self.percent = (self.voltage - self.VOLTAGE_MIN) / (self.VOLTAGE_MAX - self.VOLTAGE_MIN) * 100
-            now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
 
     def readVoltage(self):
         return (1.25 * (self.read16(self.MAX17043_VCELL) >> 4))

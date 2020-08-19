@@ -40,11 +40,9 @@ if __name__ == '__main__':
     signal.signal(signal.SIGTERM, Exit)
 
     btn = Button.Button(_up=Button_Up, _down=Button_Down)
-    if sys.argv[1] == "battery":
-        o = Battery.Battery()
-    elif sys.argv[1] == "ui":
-        o = Display.Display()
-        Show_UI(o, sys.argv[2])
+    bat = Battery.Battery()
+    scr = Display.Display()
+    Show_UI(o, sys.argv[2])
 
     while Common.RUNNING:
         time.sleep(1)
