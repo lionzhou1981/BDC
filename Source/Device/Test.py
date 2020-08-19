@@ -19,11 +19,11 @@ def Exit(_signum, _frame):
 def Button_Down(_button):
     if Common.CurrentPage == None: return
     if _button == "UP": Common.CurrentPage.OnKeyUP()
-    elif _button == "DOWN": Common.CurrentPage.OnKeyUP()
-    elif _button == "LEFT": Common.CurrentPage.OnKeyUP()
-    elif _button == "RIGHT": Common.CurrentPage.OnKeyUP()
-    elif _button == "BACK": Common.CurrentPage.OnKeyUP()
-    elif _button == "ENTER": Common.CurrentPage.OnKeyUP()
+    elif _button == "DOWN": Common.CurrentPage.OnKeyDOWN()
+    elif _button == "LEFT": Common.CurrentPage.OnKeyLEFT()
+    elif _button == "RIGHT": Common.CurrentPage.OnKeyRIGHT()
+    elif _button == "BACK": Common.CurrentPage.OnKeyBACK()
+    elif _button == "ENTER": Common.CurrentPage.OnKeyENTER()
 
 
 def Button_Up(_button):
@@ -39,10 +39,9 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, Exit)
     signal.signal(signal.SIGTERM, Exit)
 
+    btn = Button.Button(_up=Button_Up, _down=Button_Down)
     if sys.argv[1] == "battery":
         o = Battery.Battery()
-    elif sys.argv[1] == "button":
-        o = Button.Button(_up=Button_Up, _down=Button_Down)
     elif sys.argv[1] == "ui":
         o = Display.Display()
         Show_UI(o, sys.argv[2])

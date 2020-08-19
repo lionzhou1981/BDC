@@ -13,13 +13,13 @@ class PageMain(PageBase.PageBase):
         return
 
     def OnKeyUP(self):
-        super(PageMain, self).PreButton()
+        super().PreButton()
 
     def OnKeyDOWN(self):
-        super(PageMain, self).NextButton()
+        super().NextButton()
 
     def OnKeyLEFT(self):
-        super(PageMain, self).PrevButton()
+        super().PrevButton()
 
     def OnKeyRIGHT(self):
-        super(PageMain, self).NextButton()
+        super().NextButton()
