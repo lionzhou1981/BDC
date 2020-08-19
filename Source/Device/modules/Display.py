@@ -25,10 +25,9 @@ class Display:
 
     def Run(self):
         while Common.RUNNING:
-            time.sleep(0.1)
+            time.sleep(0.01)
             if self.imageChanged:
                 self.imageChanged = False
-                print("changed")
                 self.ShowPart(self.image)
 
     def ShowBase(self, _image):

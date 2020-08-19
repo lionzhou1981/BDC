@@ -22,6 +22,7 @@ LIGHT12 = ImageFont.truetype(os.path.join(PICDIR, 'light.ttf'), 12)
 LIGHT20 = ImageFont.truetype(os.path.join(PICDIR, 'light.ttf'), 20)
 
 CurrentPage = None
+CurrentBattery = None
 
 print("Common init.")
 

@@ -7,13 +7,13 @@ from pages import PageBase
 
 class PageMain(PageBase.PageBase):
     def __init__(self, _display):
-        super(PageMain, self).__init__(_display, "PageMain")
+        super(PageMain, self).__init__(_display, "PageMain", "TIME")
 
     def OnKeyENTER(self):
         return
 
     def OnKeyUP(self):
-        super().PreButton()
+        super().PrevButton()
 
     def OnKeyDOWN(self):
         super().NextButton()

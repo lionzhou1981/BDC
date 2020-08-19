@@ -28,7 +28,7 @@ class Battery:
         print("Battery Stopped")
 
     def Run(self):
-        cd = 10
+        cd = 0
         while Common.RUNNING:
             time.sleep(0.1)
             if cd > 0:
@@ -44,6 +44,7 @@ class Battery:
                 self.percent = 100
             else:
                 self.percent = (self.voltage - self.VOLTAGE_MIN) / (self.VOLTAGE_MAX - self.VOLTAGE_MIN) * 100
+            Common.CurrentBattery = self.percent
 
     def readVoltage(self):
         return (1.25 * (self.read16(self.MAX17043_VCELL) >> 4))
