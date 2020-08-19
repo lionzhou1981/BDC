@@ -37,6 +37,7 @@ if __name__ == '__main__':
 
     while Common.RUNNING:
         time.sleep(1)
-        Common.CurrentPage.RefreshTop()
+        if Common.CurrentPage.RefreshTop():
+            epp.imageChanged = True
 
     print("Exited")

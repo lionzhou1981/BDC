@@ -12,9 +12,8 @@ class PageBase:
         self.code = _code
         self.title = _title
         self.title_text = None
+        self.title_battery = None
         self.DrawLine(json.loads('["LINE_TOP","LINE",0,24,250,23,0,2]'))
-        self.DrawBattery()
-        self.DrawTitle()
         self.page = json.loads(open(os.path.join(Common.PAGEDIR, "{0}.json".format(_code)), "r").read())
         self.buttonSelected = -1
         self.buttons = []
@@ -32,14 +31,14 @@ class PageBase:
                 self.DrawImage(item)
             elif item[1] == "LINE":
                 self.DrawLine(item)
-        self.display.imageChanged = True
+        if self.RefreshTop() == False:
+            self.display.imageChanged = True
 
     def RefreshTop(self):
         update = False
         if self.title == "TIME":
             now = time.strftime("%Y-%m-%d %H:%M ")
             if self.title_text != now:
-                print("TIME - {0}".format(now))
                 self.DrawTitle(now)
                 self.title_text = now
                 update = True
@@ -56,8 +55,7 @@ class PageBase:
                 self.DrawBattery(level)
                 self.title_battery = level
                 update = True
-        if update:
-            self.display.imageChanged = True
+        return update
 
     def DrawButton(self, _item, _selected):
         ax = _item[2]
