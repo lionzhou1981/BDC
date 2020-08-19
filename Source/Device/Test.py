@@ -27,8 +27,7 @@ def Button_Down(_button):
 
 
 def Show_UI(o, _code):
-    if _code == "Main":
-        Common.CurrentPage = PageMain.PageMain(o)
+    if _code == "Main": Common.CurrentPage = PageMain.PageMain(o)
 
 
 if __name__ == '__main__':
@@ -42,7 +41,6 @@ if __name__ == '__main__':
 
     while Common.RUNNING:
         time.sleep(1)
-        this.show
         if sys.argv[1] == "battery":
             print("Battery: {0} - {1}".format(o.voltage, o.percent))
 

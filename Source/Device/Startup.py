@@ -1,42 +1,42 @@
+import sys
 import datetime
 import threading
 import time
 import signal
 import json
 import Common
-import Battery
-import Screen
-import Button
-import Audio
-import Voice
+from modules import Battery
+from modules import Button
+from modules import Display
+from pages import PageMain
 
 
 def Exit(_signum, _frame):
     Common.RUNNING = False
-    print("{0} - {1} - {2}".format("Exiting", _signum, _frame))
+    print("{0} - {1} - {2}".format("Exiting", _signum))
 
 
 def Button_Down(_button):
-    print("Button {0} clicked.".format(_button))
+    if Common.CurrentPage == None: return
+    if _button == "UP": Common.CurrentPage.OnKeyUP()
+    elif _button == "DOWN": Common.CurrentPage.OnKeyDOWN()
+    elif _button == "LEFT": Common.CurrentPage.OnKeyLEFT()
+    elif _button == "RIGHT": Common.CurrentPage.OnKeyRIGHT()
+    elif _button == "BACK": Common.CurrentPage.OnKeyBACK()
+    elif _button == "ENTER": Common.CurrentPage.OnKeyENTER()
 
 
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, Exit)
     signal.signal(signal.SIGTERM, Exit)
 
-    Battery.Start()
-    Sound.Start()
-    Button.Start(_down=Button_Down)
+    bat = Battery.Battery()
+    btn = Button.Button(_down=Button_Down)
+    epp = Display.Display()
+    Common.CurrentPage = PageMain.PageMain(epp)
 
     while Common.RUNNING:
         time.sleep(1)
-        ui = [["label_time", "label", 20, 20, 100, 40]]
-        value = {'label_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-        Screen.show(ui, value)
+        Common.CurrentPage.RefreshTop()
 
-    Button.Stop()
-    Sound.Stop()
-    Battery.Stop()
-
-    time.sleep(0.5)
     print("Exited")

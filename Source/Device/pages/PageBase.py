@@ -9,15 +9,13 @@ from PIL import Image, ImageDraw
 class PageBase:
     def __init__(self, _display, _code, _title):
         self.display = _display
+        self.code = _code
         self.title = _title
-
+        self.title_text = None
         self.DrawLine(json.loads('["LINE_TOP","LINE",0,24,250,23,0,2]'))
         self.DrawBattery()
         self.DrawTitle()
-
-        self.code = _code
-        f = open(os.path.join(Common.PAGEDIR, "{0}.json".format(_code)), "r")
-        self.page = json.loads(f.read())
+        self.page = json.loads(open(os.path.join(Common.PAGEDIR, "{0}.json".format(_code)), "r").read())
         self.buttonSelected = -1
         self.buttons = []
         buttonIndex = 0
@@ -35,6 +33,32 @@ class PageBase:
             elif item[1] == "LINE":
                 self.DrawLine(item)
         self.display.imageChanged = True
+
+
+    def RefreshTop(self):
+        update = False
+        if self.title == "TIME":
+            now = time.strftime("%Y-%m-%d %H:%M")
+            if self.title_text != now:
+                self.DrawTitle(now)
+                self.title_text = now
+                update = True
+        elif self.title_text == None:
+            self.DrawTitle(self.title)
+            self.title_text = self.title
+            update = True
+        if Common.CurrentBattery != None:
+            if Common.CurrentBattery == 999: level = "c"
+            elif Common.CurrentBattery > 70: level = "h"
+            elif Common.CurrentBattery > 30: level = "m"
+            else level = "l"
+            if self.title_battery != level:
+                self.DrawBattery(level)
+                self.title_battery = level
+                update = True
+        if update:
+            self.display.imageChanged = True
+
 
     def DrawButton(self, _item, _selected):
         ax = _item[2]
@@ -96,20 +120,11 @@ class PageBase:
         draw.line([ax, ay, bx, by], fill=color, width=width)
 
     def DrawTitle(self, _title):
-        if _title == "TIME":
-            _title = time.strftime("%Y-%m-%d %H:%M ")
-        if _title != self.title:
-            label_time = json.loads('["LABEL_TIME","LABEL",3,3,150,14,"{0}","NORMAL14","LEFT"]'.format(_title))
-            self.DrawLabel(label_time)
-            self.title = _title
+        label_time = json.loads('["LABEL_TIME","LABEL",3,3,150,14,"{0}","NORMAL14","LEFT"]'.format(_title))
+        self.DrawLabel(label_time)
 
-    def DrawBattery(self):
-        if Common.CurrentBattery == None: return
-        level = "l"
-        if Common.CurrentBattery == 999: level = "c"
-        elif Common.CurrentBattery > 70: level = "h"
-        elif Common.CurrentBattery > 30: level = "m"
-        image_battary = json.loads('["IMAGE_BATTERY","IMAGE",230,4,16,16,"bat_{0}.jpg"]'.format(level))
+    def DrawBattery(self, _level):
+        image_battary = json.loads('["IMAGE_BATTERY","IMAGE",230,4,16,16,"bat_{0}.jpg"]'.format(_level))
         self.DrawImage(image_battary)
 
     def GetFont(self, _font):
