@@ -34,12 +34,12 @@ class PageBase:
                 self.DrawLine(item)
         self.display.imageChanged = True
 
-
     def RefreshTop(self):
         update = False
         if self.title == "TIME":
-            now = time.strftime("%Y-%m-%d %H:%M")
+            now = time.strftime("%Y-%m-%d %H:%M ")
             if self.title_text != now:
+                print("TIME - {0}".format(now))
                 self.DrawTitle(now)
                 self.title_text = now
                 update = True
@@ -51,14 +51,13 @@ class PageBase:
             if Common.CurrentBattery == 999: level = "c"
             elif Common.CurrentBattery > 70: level = "h"
             elif Common.CurrentBattery > 30: level = "m"
-            else level = "l"
+            else: level = "l"
             if self.title_battery != level:
                 self.DrawBattery(level)
                 self.title_battery = level
                 update = True
         if update:
             self.display.imageChanged = True
-
 
     def DrawButton(self, _item, _selected):
         ax = _item[2]
@@ -102,8 +101,8 @@ class PageBase:
     def DrawImage(self, _item):
         ax = _item[2]
         ay = _item[3]
-        bx = _item[4]
-        by = _item[5]
+        bx = _item[2] + _item[4]
+        by = _item[3] + _item[5]
         draw = ImageDraw.Draw(self.display.image)
         draw.rectangle([ax, ay, bx, by], fill=255)
         bmp = Image.open(os.path.join(Common.PICDIR, _item[6]))

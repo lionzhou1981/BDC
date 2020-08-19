@@ -13,7 +13,7 @@ from pages import PageMain
 
 def Exit(_signum, _frame):
     Common.RUNNING = False
-    print("{0} - {1} - {2}".format("Exiting", _signum))
+    print("{0} - {1}".format("Exiting", _signum))
 
 
 def Button_Down(_button):
