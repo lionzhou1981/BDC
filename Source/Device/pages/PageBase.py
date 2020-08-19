@@ -13,10 +13,14 @@ class PageBase:
         self.page = json.loads(f.read())
         self.buttonSelected = -1
         self.buttons = []
+        buttonIndex = 0
         for item in self.page:
             if item[1] == "BUTTON":
-                self.DrawButton(item, item[9])
+                if self.buttonSelected > -1: self.DrawButton(item, False)
+                else: self.DrawButton(item, item[9])
                 self.buttons.append(item)
+                if item[9] and self.buttonSelected == -1: self.buttonSelected = buttonIndex
+                buttonIndex += 1
             elif item[1] == "LABEL":
                 self.DrawLabel(item)
             elif item[1] == "IMAGE":
@@ -26,20 +30,21 @@ class PageBase:
     def DrawButton(self, _item, _selected):
         ax = _item[2]
         ay = _item[3]
-        bx = _item[2] + item[4]
-        by = _item[3] + item[5]
+        bx = _item[2] + _item[4]
+        by = _item[3] + _item[5]
         text = _item[6]
         font = self.GetFont(_item[7])
-        fontsize = font.getsize(_item[6])
-        texty = ay + (by - fontsize[1]) / 2
+        textsize = font.getsize(_item[6])
+        tx = ax + (_item[4] - textsize[0]) / 2
+        ty = ay + (_item[5] - textsize[1]) / 2
         border = _item[8]
         draw = ImageDraw.Draw(self.display.image)
         if _selected:
             draw.rectangle([ax, ay, bx, by], fill=0, outline=0, width=border)
-            draw.text((x, texty), _item[6], align="center", font=font, fill=255)
+            draw.text((tx, ty), _item[6], align="center", font=font, fill=255)
         else:
             draw.rectangle([ax, ay, bx, by], fill=255, outline=0, width=border)
-            draw.text((x, texty), _item[6], align="center", font=font, fill=0)
+            draw.text((tx, ty), _item[6], align="center", font=font, fill=0)
 
     def DrawLabel(self, _item):
         draw = ImageDraw.Draw(self.display.image)
@@ -57,20 +62,36 @@ class PageBase:
         elif _font == "LIGHT12": return Common.LIGHT12
         elif _font == "LIGHT20": return Common.LIGHT20
 
-    def OnKeyUP(self, _key):
+    def PrevButton(self):
+        oldIndex = self.buttonSelected
+        newIndex = self.buttonSelected - 1
+        if newIndex < 0: newIndex = self.buttons.count - 1
+        self.DrawButton(self, self.buttons[oldIndex], False)
+        self.DrawButton(self, self.buttons[newIndex], False)
+        self.buttonSelected = newIndex
+
+    def NextButton(self):
+        oldIndex = self.buttonSelected
+        newIndex = self.buttonSelected + 1
+        if newIndex >= self.buttons.count: newIndex = 0
+        self.DrawButton(self, self.buttons[oldIndex], False)
+        self.DrawButton(self, self.buttons[newIndex], False)
+        self.buttonSelected = newIndex
+
+    def OnKeyUP(self):
         return
 
-    def OnKeyDOWN(self, _key):
+    def OnKeyDOWN(self):
         return
 
-    def OnKeyLEFT(self, _key):
+    def OnKeyLEFT(self):
         return
 
-    def OnKeyRIGHT(self, _key):
+    def OnKeyRIGHT(self):
         return
 
-    def OnKeyENTER(self, _key):
+    def OnKeyENTER(self):
         return
 
-    def OnKeyBACK(self, _key):
+    def OnKeyBACK(self):
         return

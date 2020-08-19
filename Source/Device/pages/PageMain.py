@@ -9,23 +9,17 @@ class PageMain(PageBase.PageBase):
     def __init__(self, _display):
         super(PageMain, self).__init__(_display, "PageMain")
 
-    def PrevButton():
+    def OnKeyENTER(self):
         return
 
-    def NextButton():
-        return
+    def OnKeyUP(self):
+        super(PageMain, self).PreButton()
 
-    def OnKeyENTER(self, _key):
-        return
+    def OnKeyDOWN(self):
+        super(PageMain, self).NextButton()
 
-    def OnKeyUP(self, _key):
-        self.PreButton()
+    def OnKeyLEFT(self):
+        super(PageMain, self).PrevButton()
 
-    def OnKeyDOWN(self, _key):
-        self.NextButton()
-
-    def OnKeyLEFT(self, _key):
-        self.PrevButton()
-
-    def OnKeyRIGHT(self, _key):
-        self.NextButton()
+    def OnKeyRIGHT(self):
+        super(PageMain, self).NextButton()

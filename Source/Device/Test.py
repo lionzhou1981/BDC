@@ -17,7 +17,13 @@ def Exit(_signum, _frame):
 
 
 def Button_Down(_button):
-    print("Button {0} down.".format(_button))
+    if Common.CurrentPage == None: return
+    if _button == "UP": Common.CurrentPage.OnKeyUP()
+    elif _button == "DOWN": Common.CurrentPage.OnKeyUP()
+    elif _button == "LEFT": Common.CurrentPage.OnKeyUP()
+    elif _button == "RIGHT": Common.CurrentPage.OnKeyUP()
+    elif _button == "BACK": Common.CurrentPage.OnKeyUP()
+    elif _button == "ENTER": Common.CurrentPage.OnKeyUP()
 
 
 def Button_Up(_button):
