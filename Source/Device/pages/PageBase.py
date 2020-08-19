@@ -44,19 +44,30 @@ class PageBase:
         draw = ImageDraw.Draw(self.display.image)
         if _selected:
             draw.rectangle([ax, ay, bx, by], fill=0, outline=0, width=border)
-            draw.text((tx, ty), _item[6], align="center", font=font, fill=255)
+            draw.text((tx, ty), _item[6], font=font, fill=255)
         else:
             draw.rectangle([ax, ay, bx, by], fill=255, outline=0, width=border)
-            draw.text((tx, ty), _item[6], align="center", font=font, fill=0)
+            draw.text((tx, ty), _item[6], font=font, fill=0)
 
     def DrawLabel(self, _item):
         ax = _item[2]
         ay = _item[3]
         bx = _item[2] + _item[4]
         by = _item[3] + _item[5]
+        text = _item[6]
+        font = self.GetFont(_item[7])
+        align = _item[8]
+        textsize = font.getsize(_item[6])
         draw = ImageDraw.Draw(self.display.image)
-        height = font.getsize(_item[6])
-        draw.text((_item[2], _item[3] + (_item[5] - height) / 2), _item[6], align="center", font=self.GetFont(_item[7]))
+        draw.rectangle([ax, ay, bx, by], fill=255)
+        if align == "LEFT":
+            draw.text((ax, ay), _item[6], font=font, fill=0)
+        elif align == "CENTER":
+            tx = ax + (_item[4] - textsize[0]) / 2
+            draw.text((tx, ay), _item[6], font=font, fill=0)
+        elif align == "RIGHT"
+            tx = bx - textsize[0]
+            draw.text((tx, ay), _item[6], font=font, fill=0)
 
     def DrawImage(self, _item):
         bmp = Image.open(os.path.join(Common.PICDIR, _item[6]))
@@ -73,10 +84,12 @@ class PageBase:
         draw.line([ax, ay, bx, by], fill=color, width=width)
 
     def DrawTop(self):
+        label_time = json.loads('["LABEL_TIME","LABEL",3,3,150,14,"{0}","NORMAL14","LEFT"]'.format(time.strftime("%Y-%m-%d %H:%M")))
+        self.DrawLabel(label_time)
         return
 
     def GetFont(self, _font):
-        if _font == "NORMAL12": return Common.NORMAL12
+        if _font == "NORMAL14": return Common.NORMAL14
         elif _font == "NORMAL20": return Common.NORMAL20
         elif _font == "NORMAL24": return Common.NORMAL24
         elif _font == "LIGHT12": return Common.LIGHT12

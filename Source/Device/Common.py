@@ -15,7 +15,7 @@ if os.path.exists(LIBDIR):
 if os.path.exists(MODDIR):
     sys.path.append(MODDIR)
 
-NORMAL12 = ImageFont.truetype(os.path.join(PICDIR, 'normal.ttf'), 12)
+NORMAL14 = ImageFont.truetype(os.path.join(PICDIR, 'normal.ttf'), 14)
 NORMAL20 = ImageFont.truetype(os.path.join(PICDIR, 'normal.ttf'), 20)
 NORMAL24 = ImageFont.truetype(os.path.join(PICDIR, 'normal.ttf'), 24)
 LIGHT12 = ImageFont.truetype(os.path.join(PICDIR, 'light.ttf'), 12)
