@@ -21,13 +21,14 @@ class Display:
         self.epd.init(self.epd.FULL_UPDATE)
         self.epd.Clear(0xFF)
         self.epd.sleep()
-        epd_2in13.epd_config.module_exit()
         print("Display stopped")
 
     def Run(self):
         while Common.RUNNING:
             time.sleep(0.1)
             if self.imageChanged:
+                self.imageChanged = False
+                print("changed")
                 self.ShowPart(self.image)
 
     def ShowBase(self, _image):
@@ -36,4 +37,4 @@ class Display:
         self.epd.init(self.epd.PART_UPDATE)
 
     def ShowPart(self, _image):
-        self.epd.displayPartBaseImage(self.epd.getbuffer(_image))
+        self.epd.displayPartial(self.epd.getbuffer(_image))

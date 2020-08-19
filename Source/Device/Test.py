@@ -26,7 +26,7 @@ def Button_Up(_button):
 
 def Show_UI(o, _code):
     if _code == "Main":
-        t = PageMain.PageMain(o)
+        Common.CurrentPage = PageMain.PageMain(o)
 
 
 if __name__ == '__main__':

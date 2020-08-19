@@ -1,5 +1,7 @@
 [
-    ["BUTTON_RECITE", "BUTTON",0,0,40,40,"背单词","NORMAL20",true],
-    ["BUTTON_TEST", "BUTTON",50,0,40,40,"测验","NORMAL20",false],
-    ["BUTTON_CONFIG", "BUTTON",100,0,40,40,"设置","NORMAL20",false]
+    ["LABEL_TIPS","LABEL",0,0,0,0,"","Normal20"],
+    ["BUTTON_FIND","BUTTON",0,0,40,40,"查","NORMAL24",1,true],
+    ["BUTTON_RECITE","BUTTON",0,0,40,40,"背","NORMAL24",1,true],
+    ["BUTTON_TEST","BUTTON",50,0,40,40,"测","NORMAL24",1,false],
+    ["BUTTON_CONFIG","BUTTON",100,0,40,40,"设","NORMAL24",1,false]
 ]
