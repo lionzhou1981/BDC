@@ -31,8 +31,8 @@ class PageBase:
                 self.DrawImage(item)
             elif item[1] == "LINE":
                 self.DrawLine(item)
-        if self.RefreshTop() == False:
-            self.display.imageChanged = True
+        self.RefreshTop():
+        self.display.imageChanged = True
 
     def RefreshTop(self):
         update = False

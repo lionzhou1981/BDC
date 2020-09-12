@@ -3,22 +3,17 @@ import time
 import os
 import smbus
 import datetime
+from libs import Adafruit_I2C
 import Common
 
 
-class Battery:
-    def __init__(self):
-        self.MAX17043_ADDR = 0x36
-        self.MAX17043_VCELL = 0x02
-        self.MAX17043_SOC = 0x04
-        self.MAX17043_MODE = 0x06
-        self.MAX17043_VERSION = 0x08
-        self.MAX17043_CONFIG = 0x0c
-        self.MAX17043_COMMAND = 0xfe
+class Battery(Adafruit_I2C):
+    def __init__(self, debug=False, adr=0x40, bus=1):
+        Adafruit_I2C.__init__(self, adr, bus, debug)
+        Adafruit_I2C.writeList(self, 0x05, [0x0a, 0x00])
         self.VOLTAGE_MAX = 3900
         self.VOLTAGE_MIN = 3600
         self.VOLTAGE_CHARGING = 4100
-        self.bus = smbus.SMBus(1)
         self.voltage = -1
         self.percent = -1
         _thread.start_new_thread(self.Run, ())
@@ -46,22 +41,7 @@ class Battery:
                 self.percent = (self.voltage - self.VOLTAGE_MIN) / (self.VOLTAGE_MAX - self.VOLTAGE_MIN) * 100
             Common.CurrentBattery = self.percent
 
-    def readVoltage(self):
-        return (1.25 * (self.read16(self.MAX17043_VCELL) >> 4))
-
-    def readPercentage(self):
-        tmp = self.read16(self.MAX17043_SOC)
-        return ((tmp >> 8) + 0.003906 * (tmp & 0x00ff))
-
-    def write16(self, reg, dat):
-        buf = [dat >> 8, dat & 0x00ff]
-        self.bus.write_i2c_block_data(self.MAX17043_ADDR, reg, buf)
-
-    def read16(self, reg):
-        buf = self.bus.read_i2c_block_data(self.MAX17043_ADDR, reg, 2)
-        return ((buf[0] << 8) | buf[1])
-
-    def writeRegBits(self, reg, dat, bits, offset):
-        tmp = self.read16(reg)
-        tmp = (tmp & (~(bits << offset))) | (dat << offset)
-        self.write16(reg, tmp)
+    def get_voltage(self):
+        __raw_data = Adafruit_I2C.readU16(self, 0x02, False)
+        self.voltage = __raw_data * 1.25 / 1000.0
+        return self.voltage
