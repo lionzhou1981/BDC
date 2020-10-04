@@ -1,9 +1,8 @@
 import _thread
 import time
 import os
-import smbus
 import datetime
-from libs import Adafruit_I2C
+from libs.Adafruit_I2C import Adafruit_I2C
 import Common
 
 
@@ -11,9 +10,9 @@ class Battery(Adafruit_I2C):
     def __init__(self, debug=False, adr=0x40, bus=1):
         Adafruit_I2C.__init__(self, adr, bus, debug)
         Adafruit_I2C.writeList(self, 0x05, [0x0a, 0x00])
-        self.VOLTAGE_MAX = 3900
-        self.VOLTAGE_MIN = 3600
-        self.VOLTAGE_CHARGING = 4100
+        self.VOLTAGE_MAX = 3.900
+        self.VOLTAGE_MIN = 3.600
+        self.VOLTAGE_CHARGING = 4.100
         self.voltage = -1
         self.percent = -1
         _thread.start_new_thread(self.Run, ())
@@ -30,7 +29,7 @@ class Battery(Adafruit_I2C):
                 cd -= 1
                 continue
             cd = 10
-            self.voltage = self.readVoltage()
+            self.voltage = self.get_voltage()
             if self.voltage < self.VOLTAGE_MIN:
                 self.percent = 1
             elif self.voltage > self.VOLTAGE_CHARGING:
