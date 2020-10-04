@@ -1,0 +1,6 @@
+{
+    "python.formatting.yapfArgs": [
+        "--style",
+        "{column_limit: 200}"
+    ]
+}
