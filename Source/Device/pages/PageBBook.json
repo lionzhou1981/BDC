@@ -1,0 +1,8 @@
+[
+    ["BUTTON-BOOK1","BUTTON",15,36,191,15,"",1,"NORMAL24",0,false],
+    ["BUTTON-BOOK2","BUTTON",15,56,191,15,"",1,"NORMAL24",0,false],
+    ["BUTTON-BOOK3","BUTTON",15,76,191,15,"",1,"NORMAL24",0,false],
+    ["BUTTON-BOOK4","BUTTON",15,96,191,15,"",1,"NORMAL24",0,false],
+    ["BUTTON-UP","BUTTON",235,25,15,15,"","",1,false],
+    ["BUTTON-DOWN","BUTTON",235,108,15,15,"","",1,false]
+]

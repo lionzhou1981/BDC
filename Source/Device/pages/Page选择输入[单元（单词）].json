@@ -1,0 +1,10 @@
+[
+    ["BUTTON-1","BUTTON",25,35,85,30,"","NORMAL24",1,false],
+    ["BUTTON-1","BUTTON",125,35,85,30,"","NORMAL24",1,false],
+    ["BUTTON-1","BUTTON",25,65,85,30,"","NORMAL24",1,false],
+    ["BUTTON-1","BUTTON",125,65,85,30,"","NORMAL24",1,false],
+    ["BUTTON-1","BUTTON",25,95,85,30,"","NORMAL24",1,false],
+    ["BUTTON-1","BUTTON",125,95,85,30,"","NORMAL24",1,false],
+    ["BUTTON-UP","BUTTON",235,25,15,15,"","",1,false],
+    ["BUTTON-DOWN","BUTTON",235,108,15,15,"","",1,false]
+]
