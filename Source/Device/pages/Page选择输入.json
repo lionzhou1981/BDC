@@ -1,0 +1,7 @@
+[
+    ["BUTTON-TEXTBOOK1","BUTTON",20,30,170,65,"","NORMAL24",1,false],
+    ["BUTTON-TEXTBOOK2","BUTTON",20,60,170,65,"","NORMAL24",1,false],
+    ["BUTTON-TEXTBOOK3","BUTTON",20,90,170,65,"","NORMAL24",1,false],
+    ["BUTTON-UP","BUTTON",235,25,15,15,"","",1,false],
+    ["BUTTON-down","BUTTON",235,108,15,15,"","",1,false]
+]

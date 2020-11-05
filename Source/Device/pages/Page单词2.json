@@ -1,0 +1,6 @@
+[
+    ["BUTTON-example sentence","BUTTON",20,36,210,76,"",1,"NORMAL24",0,false],
+    ["BUTTON-UP","BUTTON",235,25,15,15,"","",1,false],
+    ["BUTTON-DOWN","BUTTON",235,108,15,15,"","",1,false]
+    
+]

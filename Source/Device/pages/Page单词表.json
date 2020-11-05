@@ -1,0 +1,6 @@
+[
+    ["BUTTON-INPUT","BUTTON",15,40,65,65,"输入","NORMAL24",1,false],
+    ["BUTTON-TEXTBOOK","BUTTON",90,40,65,65,"课本","NORMAL24",1,false],
+    ["BUTTON-VOICE","BUTTON",165,40,65,65,"语音","NORMAL24",1,false]
+    
+]

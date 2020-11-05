@@ -1,0 +1,9 @@
+[
+    ["BUTTON-SOUND","BUTTON",8,33,51,36,"音量：","NORMAL24",0,false],
+    ["BUTTON-READ","BUTTON",8,76,51,36,"朗读：","NORMAL24",0,false],
+    ["BUTTON-BROADCAST","BUTTON",60,30,51,36,"播放","NORMAL24",1,false],
+    ["BUTTON-SOUND RECORDING","BUTTON",120,33,51,36,"录音","NORMAL24",1,false],
+    ["BUTTON-VOICE","BUTTON",60,75,51,36,"人声","NORMAL24",1,false],
+    ["BUTTON-SPEED","BUTTON",120,75,51,30,"速度","NORMAL24",1,false],
+    ["BUTTON-LOOP","BUTTON",179,75,51,30,"循环","NORMAL24",1,false]
+]   
