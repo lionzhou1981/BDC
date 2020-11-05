@@ -13,6 +13,7 @@ class PageBase:
         self.title = _title
         self.title_text = None
         self.title_battery = None
+        self.DrawBlank()
         self.DrawLine(json.loads('["LINE_TOP","LINE",0,24,250,23,0,2]'))
         self.page = json.loads(open(os.path.join(Common.PAGEDIR, "{0}.json".format(_code)), "r").read())
         self.buttonSelected = -1
@@ -31,7 +32,8 @@ class PageBase:
                 self.DrawImage(item)
             elif item[1] == "LINE":
                 self.DrawLine(item)
-        self.RefreshTop():
+        print("Page: {0} - Button: {1}".format(_code, len(self.buttons)))
+        self.RefreshTop()
         self.display.imageChanged = True
 
     def RefreshTop(self):
@@ -56,6 +58,10 @@ class PageBase:
                 self.title_battery = level
                 update = True
         return update
+
+    def DrawBlank(self):
+        draw = ImageDraw.Draw(self.display.image)
+        draw.rectangle([0, 25, 250, 120], fill=255, outline=0, width=0)
 
     def DrawButton(self, _item, _selected):
         ax = _item[2]
@@ -138,6 +144,7 @@ class PageBase:
         self.DrawButton(self.buttons[oldIndex], False)
         self.DrawButton(self.buttons[newIndex], True)
         self.buttonSelected = newIndex
+        print("Page:{0} - Prev: {1} -> {2}".format(self.code, oldIndex, newIndex))
         self.display.imageChanged = True
 
     def NextButton(self):
@@ -147,7 +154,14 @@ class PageBase:
         self.DrawButton(self.buttons[oldIndex], False)
         self.DrawButton(self.buttons[newIndex], True)
         self.buttonSelected = newIndex
+        print("Page:{0} - Next: {1} -> {2}".format(self.code, oldIndex, newIndex))
         self.display.imageChanged = True
+
+    def GetButton(self):
+        return self.buttons[self.buttonSelected][0]
+
+    def GotoPage(self, _page):
+        Common.CurrentPage = _page
 
     def OnKeyUP(self):
         return

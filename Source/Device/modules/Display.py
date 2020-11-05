@@ -35,5 +35,5 @@ class Display:
         self.epd.displayPartBaseImage(self.epd.getbuffer(_image))
         self.epd.init(self.epd.PART_UPDATE)
 
-    def ShowPart(self, _image):
+    def ShowPart(self, _image, _clear=False):
         self.epd.displayPartial(self.epd.getbuffer(_image))

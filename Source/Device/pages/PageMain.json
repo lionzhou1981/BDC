@@ -1,7 +1,7 @@
 [
     ["LABEL_TIPS","LABEL",10,31,230,20,"知耻而后勇","LIGHT20","CENTER"],
-    ["BUTTON_FIND","BUTTON",10,62,50,50,"查","NORMAL24",1,true],
-    ["BUTTON_RECITE","BUTTON",70,62,50,50,"背","NORMAL24",1,true],
-    ["BUTTON_TEST","BUTTON",130,62,50,50,"测","NORMAL24",1,false],
-    ["BUTTON_CONFIG","BUTTON",190,62,50,50,"设","NORMAL24",1,false]
+    ["BUTTON_C","BUTTON",10,62,50,50,"查","NORMAL24",1,false],
+    ["BUTTON_B","BUTTON",70,62,50,50,"背","NORMAL24",1,true],
+    ["BUTTON_T","BUTTON",130,62,50,50,"测","NORMAL24",1,false],
+    ["BUTTON_S","BUTTON",190,62,50,50,"设","NORMAL24",1,false]
 ]
