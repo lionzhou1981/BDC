@@ -2,14 +2,15 @@ import _thread
 import time
 from RPi import GPIO
 import Common
+import Config
 
 
 class Button:
     def __init__(self, _down=None, _up=None):
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)  # 关闭警告
-        self.PIN_NUM = [22, 12, 13, 16, 6, 27]
-        self.PIN_TXT = ["UP", "DOWN", "LEFT", "RIGHT", "ENTER", "BACK"]
+        self.PIN_NUM = Config.BUTTON_PIN
+        self.PIN_TXT = Config.BUTTON_TXT
         self.PIN_HIT = [False, False, False, False, False, False]
         self.EVENT_UP = _up
         self.EVENT_DOWN = _down
