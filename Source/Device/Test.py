@@ -9,6 +9,9 @@ from modules import Battery
 from modules import Button
 from modules import Display
 from pages import PageMain
+from pages import PageC
+from pages import PageB
+from pages import PageS
 
 
 def Exit(_signum, _frame):
@@ -17,6 +20,7 @@ def Exit(_signum, _frame):
 
 
 def Button_Down(_button):
+    print("Button: {0}".format(_button))
     if Common.CurrentPage == None: return
     if _button == "UP": Common.CurrentPage.OnKeyUP()
     elif _button == "DOWN": Common.CurrentPage.OnKeyDOWN()
@@ -28,6 +32,9 @@ def Button_Down(_button):
 
 def Show_UI(o, _code):
     if _code == "Main": Common.CurrentPage = PageMain.PageMain(o)
+    if _code == "C": Common.CurrentPage = PageC.PageC(o)
+    if _code == "B": Common.CurrentPage = PageB.PageB(o)
+    if _code == "S": Common.CurrentPage = PageS.PageS(o)
 
 
 if __name__ == '__main__':
@@ -37,12 +44,15 @@ if __name__ == '__main__':
     btn = Button.Button(_down=Button_Down)
     bat = Battery.Battery()
     scr = Display.Display()
-    Show_UI(scr, sys.argv[2])
 
+    loop = 0
     while Common.RUNNING:
         time.sleep(1)
         if sys.argv[1] == "battery":
-            print("Battery: {0} - {1}".format(o.voltage, o.percent))
+            print("Battery: {0} - {1}".format(bat.voltage, bat.percent))
+        elif sys.argv[1] == "ui" and loop == 0:
+            Show_UI(scr, sys.argv[2])
+        loop = loop + 1
 
     time.sleep(0.5)
     print("Exited")

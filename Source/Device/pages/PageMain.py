@@ -3,6 +3,9 @@ import time
 import json
 import Common
 from pages import PageBase
+from pages import PageC
+from pages import PageB
+from pages import PageS
 
 
 class PageMain(PageBase.PageBase):
@@ -10,13 +13,18 @@ class PageMain(PageBase.PageBase):
         super(PageMain, self).__init__(_display, "PageMain", "TIME")
 
     def OnKeyENTER(self):
-        return
+        btn = super().GetButton()
+        print("Current: {0}".format(btn))
+        if btn == "BUTTON_C": super().GotoPage(PageC.PageC(self.display))
+        elif btn == "BUTTON_B": super().GotoPage(PageB.PageB(self.display))
+        elif btn == "BUTTON_T": super().GotoPage(PageT.PageT(self.display))
+        elif btn == "BUTTON_S": super().GotoPage(PageS.PageS(self.display))
 
     def OnKeyUP(self):
-        super().PrevButton()
+        return
 
     def OnKeyDOWN(self):
-        super().NextButton()
+        return
 
     def OnKeyLEFT(self):
         super().PrevButton()
