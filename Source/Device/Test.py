@@ -12,6 +12,23 @@ from pages import PageMain
 from pages import PageC
 from pages import PageB
 from pages import PageS
+from pages import PageBBook
+from pages import PageBBookUnit
+from pages import PageBMission
+from pages import PageBRandom
+from pages import PageSRecord
+from pages import PageSRepeat
+from pages import PageSVoice
+from pages import PageSVolume
+from pages import Pageword1
+from pages import Pageword2
+from pages import Pageread
+from pages import PageKeyboard
+from pages import PageChoiceUnitWord
+from pages import PageChoiceUnit
+from pages import PageChoice
+
+
 
 
 def Exit(_signum, _frame):
@@ -34,8 +51,24 @@ def Show_UI(o, _code):
     if _code == "Main": Common.CurrentPage = PageMain.PageMain(o)
     if _code == "C": Common.CurrentPage = PageC.PageC(o)
     if _code == "B": Common.CurrentPage = PageB.PageB(o)
+    if _code == "BBook": Common.CurrentPage = PageBBook.PageBBook(o)
     if _code == "S": Common.CurrentPage = PageS.PageS(o)
-
+    if _code == "BBookUnit": Common.CurrentPage = PageBBookUnit.PageBBookUnit(o)
+    if _code == "BMission": Common.CurrentPage = PageBMission.PageBMission(o)
+    if _code == "BRandom": Common.CurrentPage = PageBRandom.PageBRandom(o)
+    if _code == "SRecord": Common.CurrentPage = PageSRecord.PageSRecord(o)
+    if _code == "SRepeat": Common.CurrentPage = PageSRepeat.PageSRepeat(o)
+    if _code == "SSpeed": Common.CurrentPage = PageSSpeed.PageSSpeed(o)
+    if _code == "SVoice": Common.CurrentPage = PageSVoice.PageSVoice(o)
+    if _code == "SVolume": Common.CurrentPage = PageSVolume.PageSVolume(o)
+    if _code == "word1": Common.CurrentPage = Pageword1.Pagword2word1(o)
+    if _code == "word2": Common.CurrentPage = Pageword2.Pageword2(o)
+    if _code == "Read": Common.CurrentPage = Pageread.Pageread(o)
+    if _code == "Keyboard": Common.CurrentPage = PageKeyboard.PageKeyboard(o)
+    if _code == "ChoiceUnitWord": Common.CurrentPage = PageChoiceUnitWord.PageChoiceUnitWord(o)
+    if _code == "ChoiceUnit": Common.CurrentPage = PageChoiceUnit.PageChoiceUnit(o)
+    if _code == "Choice": Common.CurrentPage = PageChoice.PageChoice(o)
+    
 
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, Exit)

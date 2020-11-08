@@ -6,13 +6,15 @@ from pages import PageBase
 from pages import PageMain
 
 
-class PageS(PageBase.PageBase):
+class PageBBook(PageBase.PageBase):
     def __init__(self, _display):
-        super(PageS, self).__init__(_display, "PageS", "TIME")
+        print("init 1")
+        super(PageBBook, self).__init__(_display, "PageBBook", "TIME")
+        print("init 1")
 
     def OnKeyENTER(self):
         return
-
+        
     def OnKeyBACK(self):
         super().GotoPage(PageMain.PageMain(self.display))
 

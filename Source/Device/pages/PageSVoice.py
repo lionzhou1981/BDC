@@ -6,9 +6,9 @@ from pages import PageBase
 from pages import PageMain
 
 
-class PageS(PageBase.PageBase):
+class PageSVoice(PageBase.PageBase):
     def __init__(self, _display):
-        super(PageS, self).__init__(_display, "PageS", "TIME")
+        super(PageSVoice, self).__init__(_display, "PageSVoice", "TIME")
 
     def OnKeyENTER(self):
         return

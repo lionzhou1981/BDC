@@ -3,7 +3,7 @@ import time
 import json
 import Common
 from pages import PageBase
-from pages import PageMainMain
+from pages import PageMain
 
 
 class PageC(PageBase.PageBase):
