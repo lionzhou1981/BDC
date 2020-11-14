@@ -8,6 +8,7 @@ import Common
 from modules import Battery
 from modules import Button
 from modules import Display
+from modules import Word
 from pages import PageMain
 
 
@@ -30,6 +31,7 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, Exit)
     signal.signal(signal.SIGTERM, Exit)
 
+    txt = Word.Word()
     bat = Battery.Battery()
     btn = Button.Button(_down=Button_Down)
     epp = Display.Display()

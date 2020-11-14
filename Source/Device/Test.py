@@ -8,6 +8,7 @@ import Common
 from modules import Battery
 from modules import Button
 from modules import Display
+from modules import Word
 from pages import PageMain
 from pages import PageC
 from pages import PageB
@@ -27,8 +28,6 @@ from pages import PageKeyboard
 from pages import PageChoiceUnitWord
 from pages import PageChoiceUnit
 from pages import PageChoice
-
-
 
 
 def Exit(_signum, _frame):
@@ -68,12 +67,14 @@ def Show_UI(o, _code):
     if _code == "ChoiceUnitWord": Common.CurrentPage = PageChoiceUnitWord.PageChoiceUnitWord(o)
     if _code == "ChoiceUnit": Common.CurrentPage = PageChoiceUnit.PageChoiceUnit(o)
     if _code == "Choice": Common.CurrentPage = PageChoice.PageChoice(o)
-    
 
+
+words = {}
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, Exit)
     signal.signal(signal.SIGTERM, Exit)
 
+    words = Word.Word()
     btn = Button.Button(_down=Button_Down)
     bat = Battery.Battery()
     scr = Display.Display()

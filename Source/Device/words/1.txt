@@ -128,7 +128,7 @@ v.;审查,仔细检查,审查;All candidates are carefully vetted for security r
 
 cave;[keɪv]
 n.;山洞,洞穴;Another flash of lightning lit up the cave.
-v.;塌陷,倒塌,屈,;洞穴潜水;The cave roof collapsed.
+v.;塌陷,倒塌,屈,洞穴潜水;The cave roof collapsed.
 
 guard;[ɡɑːd]
 n.;卫兵,警卫员,看守,卫兵,警卫,警戒,保卫,保护;The prisoner slipped past the guards on the gate and escaped.
