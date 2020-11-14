@@ -21,9 +21,9 @@ from pages import PageSRecord
 from pages import PageSRepeat
 from pages import PageSVoice
 from pages import PageSVolume
-from pages import Pageword1
-from pages import Pageword2
-from pages import Pageread
+from pages import PageWord1
+from pages import PageWord2
+from pages import PageRead
 from pages import PageKeyboard
 from pages import PageChoiceUnitWord
 from pages import PageChoiceUnit
@@ -60,9 +60,9 @@ def Show_UI(o, _code):
     if _code == "SSpeed": Common.CurrentPage = PageSSpeed.PageSSpeed(o)
     if _code == "SVoice": Common.CurrentPage = PageSVoice.PageSVoice(o)
     if _code == "SVolume": Common.CurrentPage = PageSVolume.PageSVolume(o)
-    if _code == "word1": Common.CurrentPage = Pageword1.Pagword2word1(o)
-    if _code == "word2": Common.CurrentPage = Pageword2.Pageword2(o)
-    if _code == "Read": Common.CurrentPage = Pageread.Pageread(o)
+    if _code == "Word1": Common.CurrentPage = PageWord1.PageWord1(o)
+    if _code == "Word2": Common.CurrentPage = PageWord2.PageWord2(o)
+    if _code == "Read": Common.CurrentPage = PageRead.PageRead(o)
     if _code == "Keyboard": Common.CurrentPage = PageKeyboard.PageKeyboard(o)
     if _code == "ChoiceUnitWord": Common.CurrentPage = PageChoiceUnitWord.PageChoiceUnitWord(o)
     if _code == "ChoiceUnit": Common.CurrentPage = PageChoiceUnit.PageChoiceUnit(o)

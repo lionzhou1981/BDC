@@ -1,7 +1,7 @@
 [
-    ["BUTTON-WORD","BUTTON",10,36,80,30,"","NORMAL24",0,false],
-    ["BUTTON-Phonetic symbols","BUTTON",10,77,105,30,"",1,"NORMAL24",0,false],
-    ["BUTTON-Part of speech+chinese","BUTTON",125,36,105,76,"",1,"NORMAL24",0,false],
-    ["BUTTON-UP","BUTTON",235,25,15,15,"","",1,false],
-    ["BUTTON-DOWN","BUTTON",235,108,15,15,"","",1,false]
+    ["LABEL-WORD","LABEL",10,36,80,30,"file","LIGHT20","CENTER"],
+    ["LABEL-Phonetic symbols","LABEL",10,77,105,30,"[faɪl]","LIGHT20","CENTER"],
+    ["LABEL-Part of speech+chinese","LABEL",125,36,105,76,"n.文件夹;卷宗;(计算机的)文件;档案","LIGHT20","CENTER"],
+    ["LABEL-UP","LABEL",235,25,15,15,"上","LIGHT20","CENTER"],
+    ["LABEL-DOWN","LABEL",235,108,15,15,"下","LIGHT20","CENTER"]
 ]
