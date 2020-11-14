@@ -1,8 +1,7 @@
 [
-    ["BUTTON-WORD","BUTTON",10,36,80,30,"",1,"NORMAL24",0,false],
+    ["BUTTON-WORD","BUTTON",10,36,80,30,"","NORMAL24",0,false],
     ["BUTTON-Phonetic symbols","BUTTON",10,77,105,30,"",1,"NORMAL24",0,false],
     ["BUTTON-Part of speech+chinese","BUTTON",125,36,105,76,"",1,"NORMAL24",0,false],
     ["BUTTON-UP","BUTTON",235,25,15,15,"","",1,false],
     ["BUTTON-DOWN","BUTTON",235,108,15,15,"","",1,false]
-    
 ]
