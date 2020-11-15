@@ -19,10 +19,12 @@ NORMAL14 = ImageFont.truetype(os.path.join(PICDIR, 'normal.ttf'), 14)
 NORMAL20 = ImageFont.truetype(os.path.join(PICDIR, 'normal.ttf'), 20)
 NORMAL24 = ImageFont.truetype(os.path.join(PICDIR, 'normal.ttf'), 24)
 LIGHT12 = ImageFont.truetype(os.path.join(PICDIR, 'light.ttf'), 12)
-LIGHT20 = ImageFont.truetype(os.path.join(PICDIR, 'light.ttf'), 20) 
+LIGHT20 = ImageFont.truetype(os.path.join(PICDIR, 'light.ttf'), 20)
+SYMBOL20 = ImageFont.truetype(os.path.join(PICDIR, 'symbol.ttf'), 20)
 
 CurrentPage = None
 CurrentBattery = None
+CurrentWords = None
 
 print("Common init.")
 

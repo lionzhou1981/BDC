@@ -18,6 +18,7 @@ def Exit(_signum, _frame):
 
 
 def Button_Down(_button):
+    print("Button: {0}".format(_button))
     if Common.CurrentPage == None: return
     if _button == "UP": Common.CurrentPage.OnKeyUP()
     elif _button == "DOWN": Common.CurrentPage.OnKeyDOWN()
@@ -31,15 +32,15 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, Exit)
     signal.signal(signal.SIGTERM, Exit)
 
-    txt = Word.Word()
     bat = Battery.Battery()
     btn = Button.Button(_down=Button_Down)
-    epp = Display.Display()
-    Common.CurrentPage = PageMain.PageMain(epp)
+    scr = Display.Display()
+    Common.CurrentWords = Word.Word()
+    top = PageMain.PageMain(scr)
 
     while Common.RUNNING:
         time.sleep(1)
         if Common.CurrentPage.RefreshTop():
-            epp.imageChanged = True
+            scr.imageChanged = True
 
     print("Exited")

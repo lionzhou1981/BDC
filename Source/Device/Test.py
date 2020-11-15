@@ -69,7 +69,6 @@ def Show_UI(o, _code):
     if _code == "Choice": Common.CurrentPage = PageChoice.PageChoice(o)
 
 
-words = {}
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, Exit)
     signal.signal(signal.SIGTERM, Exit)

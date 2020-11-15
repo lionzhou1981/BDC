@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw
 
 
 class PageBase:
-    def __init__(self, _display, _code, _title):
+    def __init__(self, _display, _code, _title, _page=None):
         self.display = _display
         self.code = _code
         self.title = _title
@@ -15,7 +15,10 @@ class PageBase:
         self.title_battery = None
         self.DrawBlank()
         self.DrawLine(json.loads('["LINE_TOP","LINE",0,24,250,23,0,2]'))
-        self.page = json.loads(open(os.path.join(Common.PAGEDIR, "{0}.json".format(_code)), "r").read())
+        if _page == None:
+            self.page = json.loads(open(os.path.join(Common.PAGEDIR, "{0}.json".format(_code)), "r").read())
+        else:
+            self.page = _page
         self.buttonSelected = -1
         self.buttons = []
         buttonIndex = 0
@@ -33,6 +36,7 @@ class PageBase:
             elif item[1] == "LINE":
                 self.DrawLine(item)
         print("Page: {0} - Button: {1}".format(_code, len(self.buttons)))
+        Common.CurrentPage = self
         self.RefreshTop()
         self.display.imageChanged = True
 
@@ -136,6 +140,7 @@ class PageBase:
         elif _font == "NORMAL24": return Common.NORMAL24
         elif _font == "LIGHT12": return Common.LIGHT12
         elif _font == "LIGHT20": return Common.LIGHT20
+        elif _font == "SYMBOL20": return Common.SYMBOL20
 
     def PrevButton(self):
         oldIndex = self.buttonSelected

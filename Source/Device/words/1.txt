@@ -6,7 +6,7 @@ expensive;[ɪkˈspensɪv]
 adj.;昂贵的,花钱多的,价格高的;I get very nervous because I'm using a lot of expensive equipment.
 
 brochure;[ˈbrəʊʃə(r)]
-n.;资料手册；May I have the brochure for the mall?
+n.;资料手册;May I have the brochure for the mall?
 
 agent;[ˈeɪdʒənt]
 n.;代理人，经纪人;You are buying direct, rather than through an agent.
@@ -22,7 +22,7 @@ raise;[reɪz]
 v.;提升,举起,提起;She raised the gun and fired.
 n.;高地,上升,加薪;They raised their offer to $500.
 
-v;[ˈnæʃnəl]
+national;[ˈnæʃnəl]
 adj.;国家的,民族的,全国的,国有的,国立的,国营的;These buildings are part of our national heritage.
 n.;公民;a Sri-Lankan-born British national.
 
@@ -37,11 +37,11 @@ v.;向…扔石块,用石头砸,去掉…的果核;Some children were throwing s
 mountain;[ˈmaʊntən]
 n.;高山,山岳,许多,大量;We spent a week walking in the mountains.
 
-ancient; [ˈeɪnʃənt]
+ancient;[ˈeɪnʃənt]
 adj.;古代的,古老的,很老的,古代人;He's ancient─he must be at least fifty!
 n.;古代人,古文明国的国民,<古>高龄老人,<古>旗手;The ancients knew more than we do about the heavens.
 
-hietory;[ˈhɪstri]
+history;[ˈhɪstri]
 n.;历史,发展史、历史,历史课,历史学;a turning point in human history.
 
 interest;[ˈɪntrəst]
@@ -75,10 +75,9 @@ someone;[ˈsʌmwʌn]
 pron.;某人,重要人物;There's someone at the door.
 
 puppy;[ˈpʌpi]
-n.;小狗,幼犬,傲慢小子,自负无礼的青年；One Sunday he began trying to teach the two puppies to walk on a leash.
+n.;小狗,幼犬,傲慢小子,自负无礼的青年;One Sunday he began trying to teach the two puppies to walk on a leash.
 
-
-thirsty；[ˈθɜːsti]
+thirsty;[ˈθɜːsti]
 adj.;渴的,口渴的,渴望,渴求,热望,干旱的,缺水的;People should understand how thirsty for revenge they are.
 
 lovely;[ˈlʌvli]

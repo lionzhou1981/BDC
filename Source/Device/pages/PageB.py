@@ -4,6 +4,9 @@ import json
 import Common
 from pages import PageBase
 from pages import PageMain
+from pages import PageBBook
+from pages import PageBRandom
+from pages import PageBMission
 
 
 class PageB(PageBase.PageBase):
@@ -11,7 +14,11 @@ class PageB(PageBase.PageBase):
         super(PageB, self).__init__(_display, "PageB", "TIME")
 
     def OnKeyENTER(self):
-        return
+        btn = super().GetButton()
+        print("Current: {0}".format(btn))
+        if btn == "BUTTON_BOOK": super().GotoPage(PageBBook.PageBBook(self.display))
+        elif btn == "BUTTON_RANDOM": super().GotoPage(PageBRandom.PageBRandom(self.display, True))
+        elif btn == "BUTTON_MISSION": super().GotoPage(PageBMission.PageBMission(self.display))
 
     def OnKeyBACK(self):
         super().GotoPage(PageMain.PageMain(self.display))
