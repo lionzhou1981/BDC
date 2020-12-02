@@ -131,7 +131,7 @@ v.;塌陷,倒塌,屈,洞穴潜水;The cave roof collapsed.
 
 guard;[ɡɑːd]
 n.;卫兵,警卫员,看守,卫兵,警卫,警戒,保卫,保护;The prisoner slipped past the guards on the gate and escaped.
-v.;警卫,守卫,保卫,看守,监视;You can't get in; the whole place is guarded.
+v.;警卫,守卫,保卫,看守,监视;You can't get in, the whole place is guarded.
 
 blind;blind
 adj.;瞎的,失明的,盲人,视而不见的,未察觉的;Doctors think he will go blind.

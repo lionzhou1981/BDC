@@ -2,5 +2,6 @@
     "python.formatting.yapfArgs": [
         "--style",
         "{column_limit: 200}"
-    ]
+    ],
+    "python.pythonPath": "C:\\Tools\\Anaconda3\\python.exe"
 }

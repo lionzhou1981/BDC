@@ -1,5 +1,5 @@
 [
-    ["LABEL_TIPS","LABEL",10,31,230,20,"知耻而后勇","LIGHT20","CENTER"],
+    ["LABEL_TIPS","LABEL",10,31,230,20,"知耻而后勇","LIGHT16","CENTER"],
     ["BUTTON_C","BUTTON1",10,62,50,50,"查","NORMAL24",1,false],
     ["BUTTON_B","BUTTON",70,62,50,50,"背","NORMAL24",1,true],
     ["BUTTON_T","BUTTON1",130,62,50,50,"测","NORMAL24",1,false],

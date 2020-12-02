@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw
 
 
 class PageBase:
-    def __init__(self, _display, _code, _title, _page=None):
+    def __init__(self, _display, _code, _title, _page=None, _image=None):
         self.display = _display
         self.code = _code
         self.title = _title
@@ -15,27 +15,33 @@ class PageBase:
         self.title_battery = None
         self.DrawBlank()
         self.DrawLine(json.loads('["LINE_TOP","LINE",0,24,250,23,0,2]'))
-        if _page == None:
-            self.page = json.loads(open(os.path.join(Common.PAGEDIR, "{0}.json".format(_code)), "r").read())
+        if _image == None:
+            if _page == None:
+                self.page = json.loads(open(os.path.join(Common.PAGEDIR, "{0}.json".format(_code)), "r").read())
+            else:
+                self.page = _page
+            self.buttonSelected = -1
+            self.buttons = []
+            buttonIndex = 0
+            for item in self.page:
+                if item[1] == "BUTTON":
+                    if self.buttonSelected > -1: self.DrawButton(item, False)
+                    else: self.DrawButton(item, item[9])
+                    self.buttons.append(item)
+                    if item[9] and self.buttonSelected == -1: self.buttonSelected = buttonIndex
+                    buttonIndex += 1
+                elif item[1] == "LABEL":
+                    self.DrawLabel(item)
+                elif item[1] == "IMAGE":
+                    self.DrawImage(item)
+                elif item[1] == "LINE":
+                    self.DrawLine(item)
+            print("Page: {0} - Button: {1}".format(_code, len(self.buttons)))
         else:
-            self.page = _page
-        self.buttonSelected = -1
-        self.buttons = []
-        buttonIndex = 0
-        for item in self.page:
-            if item[1] == "BUTTON":
-                if self.buttonSelected > -1: self.DrawButton(item, False)
-                else: self.DrawButton(item, item[9])
-                self.buttons.append(item)
-                if item[9] and self.buttonSelected == -1: self.buttonSelected = buttonIndex
-                buttonIndex += 1
-            elif item[1] == "LABEL":
-                self.DrawLabel(item)
-            elif item[1] == "IMAGE":
-                self.DrawImage(item)
-            elif item[1] == "LINE":
-                self.DrawLine(item)
-        print("Page: {0} - Button: {1}".format(_code, len(self.buttons)))
+            draw = ImageDraw.Draw(self.display.image)
+            draw.rectangle([0, 28, 250, 122], fill=255)
+            self.display.image.paste(_image, (0, 28))
+
         Common.CurrentPage = self
         self.RefreshTop()
         self.display.imageChanged = True
@@ -63,9 +69,26 @@ class PageBase:
                 update = True
         return update
 
-    def DrawBlank(self):
+    def DrawBox(self, _item, _image=None):
+        ax = _item[2]
+        ay = _item[3]
+        bx = _item[2] + _item[4]
+        by = _item[3] + _item[5]
+        fill = _item[6]
+
+        if _image == None:
+            draw = ImageDraw.Draw(self.display.image)
+        else:
+            draw = ImageDraw.Draw(_image)
+
+        if fill:
+            draw.rectangle([ax, ay, bx, by], fill=0, outline=0, width=1)
+        else:
+            draw.rectangle([ax, ay, bx, by], fill=1, outline=0, width=1)
+
+    def DrawBlank(self, _item=[0, 25, 250, 120]):
         draw = ImageDraw.Draw(self.display.image)
-        draw.rectangle([0, 25, 250, 120], fill=255, outline=0, width=0)
+        draw.rectangle(_item, fill=255, outline=0, width=0)
 
     def DrawButton(self, _item, _selected):
         ax = _item[2]
@@ -86,25 +109,46 @@ class PageBase:
             draw.rectangle([ax, ay, bx, by], fill=255, outline=0, width=border)
             draw.text((tx, ty), _item[6], font=font, fill=0)
 
-    def DrawLabel(self, _item):
+    def DrawLabel(self, _item, _image=None):
         ax = _item[2]
         ay = _item[3]
         bx = _item[2] + _item[4]
-        by = _item[3] + _item[5]
         text = _item[6]
         font = self.GetFont(_item[7])
         align = _item[8]
-        textsize = font.getsize(_item[6])
-        draw = ImageDraw.Draw(self.display.image)
+
+        lines = []
+        line = ""
+        for i in range(0, len(text)):
+            size = font.getsize("{0}{1}".format(line, text[i]))
+            if size[0] <= _item[4]:
+                line = "{0}{1}".format(line, text[i])
+            else:
+                lines.append(line)
+                line = text[i]
+        if line != "": lines.append(line)
+
+        if _image == None:
+            draw = ImageDraw.Draw(self.display.image)
+        else:
+            draw = ImageDraw.Draw(_image)
+
+        by = _item[3] + _item[5] * len(lines) + len(lines) - 1
         draw.rectangle([ax, ay, bx, by], fill=255)
-        if align == "LEFT":
-            draw.text((ax, ay), _item[6], font=font, fill=0)
-        elif align == "CENTER":
-            tx = ax + (_item[4] - textsize[0]) / 2
-            draw.text((tx, ay), _item[6], font=font, fill=0)
-        elif align == "RIGHT":
-            tx = bx - textsize[0]
-            draw.text((tx, ay), _item[6], font=font, fill=0)
+
+        for i in range(0, len(lines)):
+            size = font.getsize(lines[i])
+            if align == "LEFT":
+                draw.text((ax, ay), lines[i], font=font, fill=0)
+            elif align == "CENTER":
+                tx = ax + (_item[4] - size[0]) / 2
+                draw.text((tx, ay), lines[i], font=font, fill=0)
+            elif align == "RIGHT":
+                tx = bx - size[0]
+                draw.text((tx, ay), lines[i], font=font, fill=0)
+            ay = ay + _item[5] + i
+
+        return by
 
     def DrawImage(self, _item):
         ax = _item[2]
@@ -127,7 +171,7 @@ class PageBase:
         draw.line([ax, ay, bx, by], fill=color, width=width)
 
     def DrawTitle(self, _title):
-        label_time = json.loads('["LABEL_TIME","LABEL",3,3,150,14,"{0}","NORMAL14","LEFT"]'.format(_title))
+        label_time = json.loads('["LABEL_TIME","LABEL",3,3,150,14,"{0}","LIGHT14","LEFT"]'.format(_title))
         self.DrawLabel(label_time)
 
     def DrawBattery(self, _level):
@@ -135,12 +179,12 @@ class PageBase:
         self.DrawImage(image_battary)
 
     def GetFont(self, _font):
-        if _font == "NORMAL14": return Common.NORMAL14
+        if _font == "NORMAL16": return Common.NORMAL16
         elif _font == "NORMAL20": return Common.NORMAL20
         elif _font == "NORMAL24": return Common.NORMAL24
-        elif _font == "LIGHT12": return Common.LIGHT12
-        elif _font == "LIGHT20": return Common.LIGHT20
-        elif _font == "SYMBOL20": return Common.SYMBOL20
+        elif _font == "LIGHT14": return Common.LIGHT14
+        elif _font == "LIGHT16": return Common.LIGHT16
+        elif _font == "SYMBOL16": return Common.SYMBOL16
 
     def PrevButton(self):
         oldIndex = self.buttonSelected

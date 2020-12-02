@@ -15,12 +15,14 @@ if os.path.exists(LIBDIR):
 if os.path.exists(MODDIR):
     sys.path.append(MODDIR)
 
-NORMAL14 = ImageFont.truetype(os.path.join(PICDIR, 'normal.ttf'), 14)
+LIGHT14 = ImageFont.truetype(os.path.join(PICDIR, 'light.ttf'), 14)
+LIGHT16 = ImageFont.truetype(os.path.join(PICDIR, 'light.ttf'), 16)
+
+NORMAL16 = ImageFont.truetype(os.path.join(PICDIR, 'normal.ttf'), 16)
 NORMAL20 = ImageFont.truetype(os.path.join(PICDIR, 'normal.ttf'), 20)
 NORMAL24 = ImageFont.truetype(os.path.join(PICDIR, 'normal.ttf'), 24)
-LIGHT12 = ImageFont.truetype(os.path.join(PICDIR, 'light.ttf'), 12)
-LIGHT20 = ImageFont.truetype(os.path.join(PICDIR, 'light.ttf'), 20)
-SYMBOL20 = ImageFont.truetype(os.path.join(PICDIR, 'symbol.ttf'), 20)
+
+SYMBOL16 = ImageFont.truetype(os.path.join(PICDIR, 'symbol.ttf'), 16)
 
 CurrentPage = None
 CurrentBattery = None
