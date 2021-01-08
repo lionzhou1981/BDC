@@ -121,7 +121,7 @@ class PageBase:
         line = ""
         for i in range(0, len(text)):
             size = font.getsize("{0}{1}".format(line, text[i]))
-            if size[0] <= _item[4]:
+            if size[0] <= _item[4] - 3:
                 line = "{0}{1}".format(line, text[i])
             else:
                 lines.append(line)
@@ -139,13 +139,13 @@ class PageBase:
         for i in range(0, len(lines)):
             size = font.getsize(lines[i])
             if align == "LEFT":
-                draw.text((ax, ay), lines[i], font=font, fill=0)
+                draw.text((ax, ay), lines[i] + "   ", font=font, fill=0)
             elif align == "CENTER":
                 tx = ax + (_item[4] - size[0]) / 2
-                draw.text((tx, ay), lines[i], font=font, fill=0)
+                draw.text((tx, ay), lines[i] + "   ", font=font, fill=0)
             elif align == "RIGHT":
                 tx = bx - size[0]
-                draw.text((tx, ay), lines[i], font=font, fill=0)
+                draw.text((tx, ay), lines[i] + "   ", font=font, fill=0)
             ay = ay + _item[5] + i
 
         return by
@@ -186,20 +186,26 @@ class PageBase:
         elif _font == "LIGHT16": return Common.LIGHT16
         elif _font == "SYMBOL16": return Common.SYMBOL16
 
-    def PrevButton(self):
+    def PrevButton(self, _index=-1):
         oldIndex = self.buttonSelected
-        newIndex = oldIndex - 1
-        if newIndex < 0: newIndex = len(self.buttons) - 1
+        if _index < 0:
+            newIndex = oldIndex - 1
+            if newIndex < 0: newIndex = len(self.buttons) - 1
+        else:
+            newIndex = _index
         self.DrawButton(self.buttons[oldIndex], False)
         self.DrawButton(self.buttons[newIndex], True)
         self.buttonSelected = newIndex
         print("Page:{0} - Prev: {1} -> {2}".format(self.code, oldIndex, newIndex))
         self.display.imageChanged = True
 
-    def NextButton(self):
+    def NextButton(self, _index=-1):
         oldIndex = self.buttonSelected
-        newIndex = oldIndex + 1
-        if newIndex >= len(self.buttons): newIndex = 0
+        if _index < 0:
+            newIndex = oldIndex + 1
+            if newIndex >= len(self.buttons): newIndex = 0
+        else:
+            newIndex = _index
         self.DrawButton(self.buttons[oldIndex], False)
         self.DrawButton(self.buttons[newIndex], True)
         self.buttonSelected = newIndex

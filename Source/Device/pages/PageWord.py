@@ -21,13 +21,19 @@ class PageWord(PageBase.PageBase):
 
         for x in self.word["data"]:
             txt = "{0}: {1}".format(self.word["data"][x][0], self.word["data"][x][1])
-            top = self.DrawLabel(['LABEL_TXT', 'LABEL', 4, top, 232, 16, txt, 'LIGHT16', 'LEFT'], self.pageImage)
+            if top % 96 > 80: top = int(top / 96) + 96
+            l = ['LABEL_TXT', 'LABEL', 4, top, 232, 16, txt, 'LIGHT16', 'LEFT']
+            print("{0} : {1}".format(top, l))
+            top = self.DrawLabel(l, self.pageImage)
             top = top + 2
 
         for x in self.word["data"]:
             for i in range(2, len(self.word["data"][x])):
-                top = top + 2
-                top = self.DrawLabel(['LABEL_TXT', 'LABEL', 4, top, 232, 16, self.word["data"][x][i], 'LIGHT16', 'LEFT'], self.pageImage)
+                if top % 96 > 80: top = int(top / 96) + 96
+                else: top = top + 2
+                l = ['LABEL_TXT', 'LABEL', 4, top, 232, 16, self.word["data"][x][i], 'LIGHT16', 'LEFT']
+                print("{0} : {1}".format(top, l))
+                top = self.DrawLabel(l, self.pageImage)
 
         self.pageCount = math.ceil(top / 96)
 
@@ -51,7 +57,7 @@ class PageWord(PageBase.PageBase):
 
     def OnKeyUP(self):
         self.pageIndex = self.pageIndex - 1
-        if self.pageIndex <= 0: self.pageIndex = self.pageCount - 1
+        if self.pageIndex < 0: self.pageIndex = self.pageCount - 1
         self.DrawBlank([0, 28, 250, 120])
         img = Image.new('1', (250, 96), 255)
         img.paste(self.pageImage, (0, self.pageIndex * -96))
