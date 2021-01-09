@@ -8,7 +8,7 @@ from pages import PageMain
 
 class PageSRecord(PageBase.PageBase):
     def __init__(self, _display):
-        super(PageSRecord, self).__init__(_display, "PageSRecord", "TIME")
+        super(PageSRecord, self).__init__(_display, "Pag    eSRecord", "TIME")
 
     def OnKeyENTER(self):
         return

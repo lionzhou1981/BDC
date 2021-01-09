@@ -1,6 +1,6 @@
 [
-    ["BUTTON-CURRENT STATE","BUTTON",10,30,60,25,"当前状态：","NORMAL24",0,false],
-    ["BUTTON-STATE","BUTTON",70,30,37,25,"男声","NORMAL24",0,false],
-    ["BUTTON-BOY","BUTTON",20,60,44,40,"男声","NORMAL24",0,false],
-    ["BUTTON-GIRL","BUTTON",75,60,44,40,"女声","NORMAL24",0,false]
+    ["LABEL-CURRENT STATE","LABEL",10,30,90,25,"当前状态:","NORMAL16","LEFT"],
+    ["LABEL-READ","LABEL",100,30,40,25,"男声","NORMAL16","LEFT"],
+    ["BUTTON-BOY","BUTTON",40,65,50,50,"男声","LIGHT16",0,false],
+    ["BUTTON-GIRL","BUTTON",160,65,50,50,"女声","LIGHT16",0,false]
 ]
