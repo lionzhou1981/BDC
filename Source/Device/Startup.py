@@ -5,6 +5,7 @@ import time
 import signal
 import json
 import Common
+import Config
 from modules import Battery
 from modules import Button
 from modules import Display
@@ -31,6 +32,8 @@ def Button_Down(_button):
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, Exit)
     signal.signal(signal.SIGTERM, Exit)
+
+    Config.LoadAll()
 
     bat = Battery.Battery()
     btn = Button.Button(_down=Button_Down)
