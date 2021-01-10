@@ -5,7 +5,7 @@ import json
 import Common
 import Config
 from pages import PageBase
-from pages import PageMain
+from pages import PageS
 from PIL import Image
 
 
@@ -39,7 +39,7 @@ class PageSVolume(PageBase.PageBase):
         return
 
     def OnKeyBACK(self):
-        super().GotoPage(PageMain.PageMain(self.display))
+        super().GotoPage(PageS.PageS(self.display))
 
     def OnKeyUP(self):
         return
