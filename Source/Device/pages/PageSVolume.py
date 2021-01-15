@@ -6,7 +6,9 @@ import Common
 import Config
 from pages import PageBase
 from pages import PageMain
+from pages import PageB
 from PIL import Image
+
 
 
 class PageSVolume(PageBase.PageBase):

@@ -1,6 +1,0 @@
-[
-    ["LABEL-CURRENT STATE","LABEL",10,30,90,25,"当前状态:","NORMAL16","LEFT"],
-    ["LABEL-READ","LABEL",100,30,40,25,"男声","NORMAL16","LEFT"],
-    ["BUTTON-BOY","BUTTON",40,65,50,50,"男声","LIGHT16",0,false],
-    ["BUTTON-GIRL","BUTTON",160,65,50,50,"女声","LIGHT16",0,false]
-]
