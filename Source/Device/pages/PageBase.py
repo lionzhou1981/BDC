@@ -90,7 +90,7 @@ class PageBase:
         draw = ImageDraw.Draw(self.display.image)
         draw.rectangle(_item, fill=255, outline=0, width=0)
 
-    def DrawButton(self, _item, _selected):
+    def DrawButton(self, _item, _selected, _image=None):
         ax = _item[2]
         ay = _item[3]
         bx = _item[2] + _item[4]
@@ -101,7 +101,12 @@ class PageBase:
         tx = ax + (_item[4] - textsize[0]) / 2
         ty = ay + (_item[5] - textsize[1]) / 2
         border = _item[8]
-        draw = ImageDraw.Draw(self.display.image)
+
+        if _image == None:
+            draw = ImageDraw.Draw(self.display.image)
+        else:
+            draw = ImageDraw.Draw(_image)
+
         if _selected:
             draw.rectangle([ax, ay, bx, by], fill=0, outline=0, width=border)
             draw.text((tx, ty), _item[6], font=font, fill=255)
@@ -184,7 +189,7 @@ class PageBase:
         elif _font == "NORMAL24": return Common.NORMAL24
         elif _font == "LIGHT14": return Common.LIGHT14
         elif _font == "LIGHT16": return Common.LIGHT16
-        elif _font == "SYMBOL16": return Common.SYMBOL16
+        elif _font == "SYMBOL20": return Common.SYMBOL20
 
     def PrevButton(self, _index=-1):
         oldIndex = self.buttonSelected

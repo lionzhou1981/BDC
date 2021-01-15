@@ -9,25 +9,23 @@ from modules import Battery
 from modules import Button
 from modules import Display
 from modules import Word
-from pages import PageMain
-from pages import PageC
 from pages import PageB
-from pages import PageS
 from pages import PageBBook
 from pages import PageBBookUnit
 from pages import PageBMission
 from pages import PageBRandom
+from pages import PageC
+from pages import PageChoice
+from pages import PageChoiceUnitWord
+from pages import PageKeyboard
+from pages import PageMain
+from pages import PageRead
+from pages import PageS
 from pages import PageSRecord
 from pages import PageSRepeat
+from pages import PageSSpeed
 from pages import PageSVoice
 from pages import PageSVolume
-from pages import PageWord1
-from pages import PageWord2
-from pages import PageRead
-from pages import PageKeyboard
-from pages import PageChoiceUnitWord
-from pages import PageChoiceUnit
-from pages import PageChoice
 
 
 def Exit(_signum, _frame):
@@ -47,26 +45,23 @@ def Button_Down(_button):
 
 
 def Show_UI(o, _code):
-    if _code == "Main": Common.CurrentPage = PageMain.PageMain(o)
-    if _code == "C": Common.CurrentPage = PageC.PageC(o)
     if _code == "B": Common.CurrentPage = PageB.PageB(o)
     if _code == "BBook": Common.CurrentPage = PageBBook.PageBBook(o)
-    if _code == "S": Common.CurrentPage = PageS.PageS(o)
     if _code == "BBookUnit": Common.CurrentPage = PageBBookUnit.PageBBookUnit(o)
-    if _code == "BMission": Common.CurrentPage = PageBMission.PageBMission(o)
     if _code == "BRandom": Common.CurrentPage = PageBRandom.PageBRandom(o)
+    if _code == "BMission": Common.CurrentPage = PageBMission.PageBMission(o)
+    if _code == "C": Common.CurrentPage = PageC.PageC(o)
+    if _code == "Choice": Common.CurrentPage = PageChoice.PageChoice(o)
+    if _code == "ChoiceUnitWord": Common.CurrentPage = PageChoiceUnitWord.PageChoiceUnitWord(o)
+    if _code == "Keyboard": Common.CurrentPage = PageKeyboard.PageKeyboard(o)
+    if _code == "Main": Common.CurrentPage = PageMain.PageMain(o)
+    if _code == "Read": Common.CurrentPage = PageRead.PageRead(o)
+    if _code == "S": Common.CurrentPage = PageS.PageS(o)
     if _code == "SRecord": Common.CurrentPage = PageSRecord.PageSRecord(o)
     if _code == "SRepeat": Common.CurrentPage = PageSRepeat.PageSRepeat(o)
     if _code == "SSpeed": Common.CurrentPage = PageSSpeed.PageSSpeed(o)
     if _code == "SVoice": Common.CurrentPage = PageSVoice.PageSVoice(o)
     if _code == "SVolume": Common.CurrentPage = PageSVolume.PageSVolume(o)
-    if _code == "Word1": Common.CurrentPage = PageWord1.PageWord1(o)
-    if _code == "Word2": Common.CurrentPage = PageWord2.PageWord2(o)
-    if _code == "Read": Common.CurrentPage = PageRead.PageRead(o)
-    if _code == "Keyboard": Common.CurrentPage = PageKeyboard.PageKeyboard(o)
-    if _code == "ChoiceUnitWord": Common.CurrentPage = PageChoiceUnitWord.PageChoiceUnitWord(o)
-    if _code == "ChoiceUnit": Common.CurrentPage = PageChoiceUnit.PageChoiceUnit(o)
-    if _code == "Choice": Common.CurrentPage = PageChoice.PageChoice(o)
 
 
 if __name__ == '__main__':

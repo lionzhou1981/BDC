@@ -1,5 +1,6 @@
 import os
 import sys
+import Config
 from PIL import ImageFont
 
 RUNNING = True
@@ -31,5 +32,17 @@ CurrentWords = None
 print("Common init.")
 
 
-def ReadText(_text, _lang, _speed=150, _amp=100):
-    os.system("espeak -v {0} -s {1} -a {2} '{3}'".format(_lang, _speed, _amp, _text))
+def ReadText(_text, _lang):
+    if Config.SETTINGS["Voice"] == "F":
+        _lang = _lang + "+f2"
+
+    if Config.SETTINGS["Speed"] == "H":
+        _speed = 180
+    elif Config.SETTINGS["Speed"] == "M":
+        _speed = 140
+    else:
+        _speed = 100
+
+    os.system("espeak -v {0} -s {1} '{2}'".format(_lang, _speed, _text))
+    for i in range(1, Config.SETTINGS["Repeat"]):
+        os.system("espeak -v {0} -s {1} '{2}'".format(_lang, _speed, _text))

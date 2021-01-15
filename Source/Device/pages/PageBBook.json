@@ -1,8 +1,0 @@
-[
-    ["BUTTON-BOOK1","BUTTON",15,36,191,15,"牛津版牛津版","LIGHT12",1,false],
-    ["BUTTON-BOOK2","BUTTON",15,56,191,15,"沪教版沪教版","LIGHT12",1,false],
-    ["BUTTON-BOOK3","BUTTON",15,76,191,15,"苏教版苏教版","LIGHT12",1,false],
-    ["BUTTON-BOOK4","BUTTON",15,96,191,15,"人教版人教版","LIGHT12",1,false],
-    ["BUTTON-up","LABEL",235,25,15,15,"上","LIGHT12","CENTER"],
-    ["BUTTON-down","LABEL",235,108,15,15,"下","LIGHT12","CENTER"]
-]

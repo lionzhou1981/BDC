@@ -5,8 +5,8 @@ import Common
 from pages import PageBase
 from pages import PageMain
 from pages import PageBBook
-from pages import PageWord
 from pages import PageBMission
+from pages import PageWord
 
 
 class PageB(PageBase.PageBase):
