@@ -79,7 +79,7 @@ if __name__ == '__main__':
         if sys.argv[1] == "battery":
             print("Battery: {0} - {1}".format(bat.voltage, bat.percent))
         elif sys.argv[1] == "ui" and loop == 0:
-        Show_UI(scr, sys.argv[2])
+            Show_UI(scr, sys.argv[2])
         loop = loop + 1
 
     time.sleep(0.5)

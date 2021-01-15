@@ -1,5 +1,5 @@
 [
-    ["BUTTON_BOOK","BUTTON1",15,40,65,65,"课本","NORMAL24",1,false],
-    ["BUTTON_RANDOM","BUTTON",90,40,65,65,"随机","NORMAL24",1,true],
+    ["BUTTON_BOOK","BUTTON",15,40,65,65,"课本","NORMAL24",1,false],
+    ["BUTTON_RANDOM","BUTTON",90,40,65,65,"随机","NORMAL24",1,false],
     ["BUTTON_MISSION","BUTTON1",165,40,65,65,"任务","NORMAL24",1,false]
 ]

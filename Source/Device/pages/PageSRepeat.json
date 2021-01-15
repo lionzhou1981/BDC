@@ -1,7 +1,0 @@
-[
-    ["LABEL-CURRENT STATE","LABEL",10,30,90,25,"当前状态:","NORMAL16","LEFT"],
-    ["LABEL-READ","LABEL",100,30,40,25,"一遍","NORMAL16","LEFT"],
-    ["BUTTON-ONE","BUTTON",42,65,48,36,"一遍","LIGHT16",0,false],
-    ["BUTTON-THREE","BUTTON",101,65,48,36,"三遍","LIGHT16",0,false],
-    ["BUTTON-FIVE","BUTTON",160,65,48,36,"五遍","LIGHT16",0,false]
-]

@@ -36,7 +36,7 @@ def SetRecord():
         subprocess.call(["amixer", "set", "Boost", "0%"])
     elif SETTINGS["Record"] == "L":
         subprocess.call(["amixer", "set", "Boost", "30%"])
-    elif SETTINGS["Record"] == "M":
+    elif SETTINGS["Record"] == "M": 
         subprocess.call(["amixer", "set", "Boost", "62%"])
     else:
         SETTINGS["Record"] = "H"
