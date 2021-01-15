@@ -3,8 +3,8 @@
     ["LABEL-READ","LABEL",4,76,66,36,"朗读:","NORMAL24","LEFT"],
     ["BUTTON-VOLUME","BUTTON",74,33,50,35,"播放","NORMAL20",1,true],
     ["BUTTON-RECORD","BUTTON",132,33,50,35,"录音","NORMAL20",1,false],
+    ["BUTTON-NETWORK","BUTTON",190,33,50,35,"网络","NORMAL20",1,false],
     ["BUTTON-VOICE","BUTTON",74,75,50,35,"人声","NORMAL20",1,false],
     ["BUTTON-SPEED","BUTTON",132,75,50,35,"速度","NORMAL20",1,false],
     ["BUTTON-REPEAT","BUTTON",190,75,50,35,"循环","NORMAL20",1,false]
 ]
-    

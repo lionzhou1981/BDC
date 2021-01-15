@@ -53,7 +53,7 @@ class PageWord(PageBase.PageBase):
         Common.ReadText(self.word["code"], "en")
 
     def OnKeyBACK(self):
-        super().GotoPage(PageB.PageB(self.display)) 
+        super().GotoPage(PageB.PageB(self.display))
 
     def OnKeyUP(self):
         self.pageIndex = self.pageIndex - 1

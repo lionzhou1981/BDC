@@ -1,7 +1,3 @@
-import os
-import time
-import json
-import Common
 from pages import PageBase
 from pages import PageMain
 from pages import PageSVolume
@@ -34,47 +30,59 @@ class PageS(PageBase.PageBase):
     def OnKeyUP(self):
         btn = self.GetButton()
         if btn == "BUTTON-VOLUME":
-            self.PrevButton(2)
-        elif btn == "BUTTON-RECORD":
             self.PrevButton(3)
+        elif btn == "BUTTON-RECORD":
+            self.PrevButton(4)
+        elif btn == "BUTTON-NETWORK":
+            self.PrevButton(5)
         elif btn == "BUTTON-VOICE":
             self.PrevButton(0)
         elif btn == "BUTTON-SPEED":
             self.PrevButton(1)
+        elif btn == "BUTTON-REPEAT":
+            self.PrevButton(2)
 
     def OnKeyDOWN(self):
         btn = self.GetButton()
         if btn == "BUTTON-VOLUME":
-            self.NextButton(2)
-        elif btn == "BUTTON-RECORD":
             self.NextButton(3)
+        elif btn == "BUTTON-RECORD":
+            self.NextButton(4)
+        elif btn == "BUTTON-NETWORK":
+            self.PrevButton(5)
         elif btn == "BUTTON-VOICE":
             self.NextButton(0)
         elif btn == "BUTTON-SPEED":
             self.NextButton(1)
+        elif btn == "BUTTON-REPEAT":
+            self.PrevButton(2)
 
     def OnKeyLEFT(self):
         btn = self.GetButton()
         if btn == "BUTTON-VOLUME":
-            self.PrevButton(1)
+            self.PrevButton(2)
         elif btn == "BUTTON-RECORD":
             self.PrevButton(0)
+        elif btn == "BUTTON-NETWORK":
+            self.PrevButton(1)
         elif btn == "BUTTON-VOICE":
-            self.PrevButton(4)
+            self.PrevButton(5)
         elif btn == "BUTTON-SPEED":
-            self.PrevButton(2)
-        elif btn == "BUTTON-REPEAT":
             self.PrevButton(3)
+        elif btn == "BUTTON-REPEAT":
+            self.PrevButton(4)
 
     def OnKeyRIGHT(self):
         btn = self.GetButton()
         if btn == "BUTTON-VOLUME":
             self.NextButton(1)
         elif btn == "BUTTON-RECORD":
-            self.NextButton(0)
-        elif btn == "BUTTON-VOICE":
-            self.NextButton(3)
-        elif btn == "BUTTON-SPEED":
-            self.NextButton(4)
-        elif btn == "BUTTON-REPEAT":
             self.NextButton(2)
+        elif btn == "BUTTON-NETWORK":
+            self.PrevButton(0)
+        elif btn == "BUTTON-VOICE":
+            self.NextButton(4)
+        elif btn == "BUTTON-SPEED":
+            self.NextButton(5)
+        elif btn == "BUTTON-REPEAT":
+            self.NextButton(3)

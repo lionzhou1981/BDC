@@ -5,8 +5,7 @@ import math
 import Common
 from pages import PageBase
 from pages import PageMain
-from pages import PageBBookUnit
-from PIL import Image, ImageDraw
+from PIL import Image
 
 
 class PageBBook(PageBase.PageBase):
@@ -14,16 +13,17 @@ class PageBBook(PageBase.PageBase):
         self.pageImage = Image.new('1', (250, 960), 255)
         self.pageIndex = 0
 
-        self.DrawLabel(['LABEL_KEY', 'LABEL', 4, -2, 121, 20, "英语（沪）", 'NORMAL20', 'LEFT'], self.pageImage)
-        top = 0
-        top = self.DrawLabel(['LABEL_SND', 'LABEL', 125, top, 111, 20, "英语（苏）", 'SYMBOL20', 'RIGHT'], self.pageImage)
-        top = top + 2
+        b1 = ["BUTTON-Z", "BUTTON", 20, 60, 44, 40, "静", "LIGHT16", 0, True]
+        b2 = ["BUTTON-L", "BUTTON", 75, 60, 44, 40, "低", "LIGHT16", 0, False]
+
+        list = [b1, b2]
+        super(PageBBook, self).__init__(_display, "PageSVolume", "TIME", _page=list)
 
     def OnKeyENTER(self):
         btn = super().GetButton()
         print("Current: {0}".format(btn))
-        if btn == "BUTTON_C": super().GotoPage(PageC.PageC(self.display))
-        elif btn == "BUTTON_B": super().GotoPage(PageB.PageB(self.display))
+        #if btn == "BUTTON_C": super().GotoPage(PageC.PageC(self.display))
+        #elif btn == "BUTTON_B": super().GotoPage(PageB.PageB(self.display))
 
     def OnKeyBACK(self):
         super().GotoPage(PageMain.PageMain(self.display))

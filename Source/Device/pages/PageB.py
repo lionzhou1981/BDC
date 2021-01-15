@@ -5,8 +5,8 @@ import Common
 from pages import PageBase
 from pages import PageMain
 from pages import PageBBook
-from pages import PageWord
 from pages import PageBMission
+from pages import PageWord
 
 
 class PageB(PageBase.PageBase):
@@ -17,11 +17,8 @@ class PageB(PageBase.PageBase):
         btn = super().GetButton()
         print("Current: {0}".format(btn))
         if btn == "BUTTON_BOOK": super().GotoPage(PageBBook.PageBBook(self.display))
-        elif btn == "BUTTON_RANDOM": super().GotoPage(PageWord.PageWord(self.display))
+        elif btn == "BUTTON_RANDOM": super().GotoPage(PageWord.PageWord(self.display, Common.CurrentWords.random()))
         elif btn == "BUTTON_MISSION": super().GotoPage(PageBMission.PageBMission(self.display))
-    
-    def OnKeyUP(self):
-        return
 
     def OnKeyBACK(self):
         super().GotoPage(PageMain.PageMain(self.display))
@@ -31,4 +28,3 @@ class PageB(PageBase.PageBase):
 
     def OnKeyRIGHT(self):
         super().NextButton()
-    

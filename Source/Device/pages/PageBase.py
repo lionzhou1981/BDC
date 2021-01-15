@@ -189,7 +189,7 @@ class PageBase:
         elif _font == "NORMAL24": return Common.NORMAL24
         elif _font == "LIGHT14": return Common.LIGHT14
         elif _font == "LIGHT16": return Common.LIGHT16
-        elif _font == "SYMBOL16": return Common.SYMBOL16
+        elif _font == "SYMBOL20": return Common.SYMBOL20
 
     def PrevButton(self, _index=-1):
         oldIndex = self.buttonSelected
